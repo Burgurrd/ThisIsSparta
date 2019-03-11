@@ -6,18 +6,14 @@ import javafx.stage.Stage;
 import java.io.IOException;
 
 public class App extends Application {
+    // @Override
+    public void start(Stage primaryStage) throws IOException {
+        Parent root = FXMLLoader.load(getClass().getResource("MainFrame.fxml"));
+        Scene scene = new Scene(root, 570, 400);
 
-    @Override
-    public void start(Stage primaryStage) throws IOException{
-        FXMLLoader fxmlLoader = new FXMLLoader();
-        fxmlLoader.setController(new MainFrameController());
-        Parent root = (Parent) fxmlLoader.load(this.getClass().getResourceAsStream("MainFrame.fxml"));
-        primaryStage.setScene(new Scene(root));
+        primaryStage.setTitle("My JavaFX Application");
+        primaryStage.setScene(scene);
         primaryStage.show();
     }
 
-
-    public static void main(String[] args) {
-        launch(args);
-    }
 }
