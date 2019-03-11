@@ -173,14 +173,14 @@
                               <TableColumn prefWidth="156.66666662693024" text="Mine øvelsesgrupper" />
                            </columns>
                         </TableView>
-                        <TableView fx:id="Øvelser" layoutX="409.0" layoutY="-1.0" prefHeight="275.0" prefWidth="191.0">
+                        <TableView fx:id="Øvelser" layoutX="409.0" layoutY="-1.0" prefHeight="277.0" prefWidth="191.0">
                            <columns>
                               <TableColumn prefWidth="189.99998982747397" text="Mine øvelser" />
                            </columns>
                         </TableView>
                         <TextField fx:id="GruppeNavn" layoutX="8.0" layoutY="287.0" prefHeight="25.0" prefWidth="146.0" promptText="Navn" />
                         <Button fx:id="LagGruppe" layoutX="158.0" layoutY="284.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="27.0" text="+" />
-                        <Button fx:id="LeggTilIGruppe" layoutX="410.0" layoutY="279.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="188.0" text="Legg til i gruppe" />
+                        <Button fx:id="LeggTilIGruppe" layoutX="411.0" layoutY="284.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="188.0" text="Legg til i gruppe" />
                         <TableView prefHeight="279.0" prefWidth="158.0">
                            <columns>
                               <TableColumn prefWidth="156.66666662693024" text="Mine øvelsesgrupper" />
@@ -196,11 +196,12 @@
                               <TableColumn prefWidth="189.3333078622818" text="Mine øvelsesgrupper" />
                            </columns>
                         </TableView>
-                        <TableView fx:id="Oversikt" layoutX="194.0" layoutY="1.0" prefHeight="316.0" prefWidth="211.0">
+                        <TableView fx:id="Oversikt" layoutX="194.0" layoutY="1.0" prefHeight="276.0" prefWidth="211.0">
                            <columns>
                               <TableColumn prefWidth="208.0000762939453" text="Oversikt" />
                            </columns>
                         </TableView>
+                        <Button fx:id="FjernFraGruppe" layoutX="194.0" layoutY="284.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="211.0" text="Fjern fra gruppe" />
                      </children>
                   </AnchorPane>
               </content>
