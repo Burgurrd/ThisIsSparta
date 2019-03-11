@@ -1,19 +1,32 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.effect.*?>
-<?import javafx.scene.text.*?>
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.Accordion?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Menu?>
+<?import javafx.scene.control.MenuBar?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.Slider?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.effect.Glow?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.shape.Rectangle?>
+<?import javafx.scene.text.Font?>
 
-
-<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="411.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="411.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <VBox alignment="BOTTOM_CENTER" prefHeight="68.0" prefWidth="600.0">
          <children>
-            <Label alignment="CENTER" prefHeight="36.0" prefWidth="323.0" text="MIN TRENINGSDAGBOK" textAlignment="CENTER" textFill="#10d020">
+            <Label alignment="CENTER" prefHeight="21.0" prefWidth="323.0" text="MIN TRENINGSDAGBOK" textAlignment="CENTER" textFill="#000f01">
                <font>
                   <Font size="25.0" />
                </font>
@@ -30,11 +43,6 @@
                     <MenuItem mnemonicParsing="false" text="Delete" />
                   </items>
                 </Menu>
-                <Menu mnemonicParsing="false" text="Help">
-                  <items>
-                    <MenuItem mnemonicParsing="false" text="About" />
-                  </items>
-                </Menu>
               </menus>
             </MenuBar>
          </children>
@@ -42,9 +50,9 @@
             <Glow />
          </effect>
       </VBox>
-      <TabPane prefHeight="391.0" prefWidth="600.0" side="BOTTOM" VBox.vgrow="ALWAYS">
+      <TabPane prefHeight="590.0" prefWidth="600.0" side="BOTTOM" VBox.vgrow="ALWAYS">
         <tabs>
-            <Tab text="Mine økter">
+            <Tab closable="false" text="Mine økter">
               <content>
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
@@ -53,8 +61,8 @@
                             <TableColumn prefWidth="153.0" text="Dato og Tid" />
                           </columns>
                         </TableView>
-                        <Slider layoutX="3.0" layoutY="268.0" prefHeight="18.0" prefWidth="92.0" />
-                        <Label layoutX="108.0" layoutY="267.0" text="n" />
+                        <Slider layoutX="31.0" layoutY="268.0" prefHeight="18.0" prefWidth="92.0" />
+                        <Label layoutX="127.0" layoutY="268.0" text="n" />
                         <TableView layoutX="154.0" layoutY="176.0" prefHeight="132.0" prefWidth="446.0">
                           <columns>
                             <TableColumn prefWidth="169.0" text="Øvelse" />
@@ -66,65 +74,134 @@
                   </AnchorPane>
               </content>
             </Tab>
-            <Tab text="Ny økt">
+            <Tab closable="false" text="Ny økt">
               <content>
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
+                        <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="323.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="600.0" />
                         <Accordion layoutX="375.0" layoutY="14.0" />
-                        <ComboBox layoutX="237.0" layoutY="36.0" prefWidth="150.0" />
-                        <Label layoutX="246.0" layoutY="15.0" text="Velg Øvelsesgruppe" />
-                        <TableView layoutX="245.0" layoutY="77.0" prefHeight="152.0" prefWidth="110.0">
+                        <ComboBox layoutX="245.0" layoutY="13.0" prefHeight="25.0" prefWidth="159.0" promptText="Velg øvelsesgruppe" />
+                        <TableView layoutX="244.0" layoutY="44.0" prefHeight="199.0" prefWidth="159.0">
                           <columns>
-                            <TableColumn prefWidth="109.0" text="Øvelser" />
+                            <TableColumn prefWidth="158.00000508626303" text="Øvelser" />
                           </columns>
                         </TableView>
-                        <Button layoutX="360.0" layoutY="123.0" mnemonicParsing="false" prefHeight="36.0" prefWidth="55.0" text="&gt;" />
-                        <TextField layoutX="55.0" layoutY="46.0" prefHeight="30.0" prefWidth="61.0" promptText="hh:mm" />
-                        <DatePicker layoutX="55.0" layoutY="12.0" prefHeight="28.0" prefWidth="167.0" />
-                        <Label layoutX="14.0" layoutY="15.0" text="Dato" />
-                        <Label layoutX="14.0" layoutY="50.0" text="Start" />
-                        <Button layoutX="444.0" layoutY="259.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="136.0" text="Registrer Økt" />
-                        <TableView layoutX="417.0" layoutY="76.0" prefHeight="154.0" prefWidth="169.0">
+                        <Button layoutX="288.0" layoutY="253.0" mnemonicParsing="false" prefHeight="43.0" prefWidth="115.0" text="&gt;" />
+                        <TextField layoutX="53.0" layoutY="52.0" prefHeight="30.0" prefWidth="61.0" promptText="hh:mm" />
+                        <DatePicker layoutX="13.0" layoutY="12.0" prefHeight="28.0" prefWidth="209.0" promptText="Dato" />
+                        <Label layoutX="14.0" layoutY="58.0" text="Start" />
+                        <Button layoutX="419.0" layoutY="259.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="166.0" text="Registrer Økt" />
+                        <TableView layoutX="417.0" layoutY="13.0" prefHeight="217.0" prefWidth="169.0">
                            <columns>
                               <TableColumn prefWidth="83.0" text="Øvelse" />
                               <TableColumn prefWidth="85.0" text="Resultat" />
                            </columns>
                         </TableView>
-                        <Label layoutX="13.0" layoutY="85.0" text="Dagsform" />
-                        <Label layoutX="11.0" layoutY="131.0" text="Prestasjon" />
-                        <Slider blockIncrement="1.0" layoutX="88.0" layoutY="97.0" majorTickUnit="1.0" max="10.0" minorTickCount="1" prefHeight="18.0" prefWidth="146.0" showTickLabels="true" showTickMarks="true" snapToTicks="true" value="5.0" />
-                        <TextArea layoutX="14.0" layoutY="186.0" prefHeight="104.0" prefWidth="200.0" promptText="Skriv inn et notat her..." wrapText="true" />
-                        <Label layoutX="12.0" layoutY="163.0" text="Notat" />
-                        <Label layoutX="246.0" layoutY="238.0" text="Resultat" />
-                        <TextField layoutX="238.0" layoutY="259.0" prefHeight="30.0" prefWidth="153.0" />
-                        <TextField layoutX="161.0" layoutY="46.0" prefHeight="30.0" prefWidth="63.0" promptText="hh:mm" />
-                        <Label layoutX="125.0" layoutY="50.0" text="Slutt" />
-                        <Button ellipsisString="🗑" layoutX="362.0" layoutY="173.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="37.0" text="🗑">
+                        <Label layoutX="13.0" layoutY="107.0" text="Dagsform" />
+                        <Label layoutX="12.0" layoutY="153.0" text="Prestasjon" />
+                        <Slider blockIncrement="1.0" layoutX="84.0" layoutY="105.0" majorTickUnit="1.0" max="10.0" minorTickCount="1" prefHeight="37.0" prefWidth="132.0" showTickLabels="true" showTickMarks="true" snapToTicks="true" value="5.0" />
+                        <TextArea layoutX="14.0" layoutY="201.0" prefHeight="89.0" prefWidth="202.0" promptText="Skriv inn et notat her..." wrapText="true" />
+                        <TextField layoutX="158.0" layoutY="52.0" prefHeight="30.0" prefWidth="63.0" promptText="hh:mm" />
+                        <Label layoutX="125.0" layoutY="58.0" text="Slutt" />
+                        <Button ellipsisString="🗑" layoutX="245.0" layoutY="252.0" mnemonicParsing="false" prefHeight="36.0" prefWidth="43.0" text="🗑">
                            <font>
                               <Font name="Arial Narrow Bold" size="21.0" />
                            </font>
                         </Button>
-                        <Slider blockIncrement="1.0" layoutX="88.0" layoutY="143.0" majorTickUnit="1.0" max="10.0" minorTickCount="1" prefHeight="18.0" prefWidth="146.0" showTickLabels="true" showTickMarks="true" snapToTicks="true" value="5.0" />
+                        <Slider blockIncrement="1.0" layoutX="84.0" layoutY="151.0" majorTickUnit="1.0" max="10.0" minorTickCount="1" prefHeight="37.0" prefWidth="132.0" showTickLabels="true" showTickMarks="true" snapToTicks="true" value="5.0" />
                      </children>
                   </AnchorPane>
               </content>
             </Tab>
-            <Tab text="Mine øvelser">
+            <Tab closable="false" text="Mine øvelser">
               <content>
-                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <TableView prefHeight="319.0" prefWidth="158.0">
+                           <columns>
+                              <TableColumn prefWidth="156.66666662693024" text="Mine øvelser" />
+                           </columns>
+                        </TableView>
+                        <TextField layoutX="429.0" layoutY="16.0" prefHeight="30.0" prefWidth="157.0" promptText="Navn" />
+                        <ComboBox layoutX="506.0" layoutY="57.0" prefHeight="25.0" prefWidth="79.0" promptText="Velg apparat" />
+                        <Label layoutX="431.0" layoutY="61.0" prefHeight="17.0" prefWidth="47.0" text="Apparat" />
+                        <Button layoutX="428.0" layoutY="268.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="159.0" text="Registrer Øvelse" />
+                        <TextArea layoutX="428.0" layoutY="162.0" prefHeight="95.0" prefWidth="159.0" promptText="Beskriv øvelse" wrapText="true" />
+                        <Label layoutX="446.0" layoutY="99.0" text="Kilo" />
+                        <Label layoutX="526.0" layoutY="99.0" text="Sett" />
+                        <TextField layoutX="431.0" layoutY="123.0" prefHeight="30.0" prefWidth="73.0" />
+                        <TextField layoutX="510.0" layoutY="123.0" prefHeight="30.0" prefWidth="75.0" />
+                        <CheckBox layoutX="484.0" layoutY="61.0" mnemonicParsing="false" />
+                     </children>
+                  </AnchorPane>
               </content>
             </Tab>
-            <Tab text="Mine apparater">
+            <Tab closable="false" text="Mine apparater">
               <content>
-                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="336.0" layoutX="-10.0" layoutY="-3.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="620.0" />
+                        <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="323.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="600.0" />
+                        <TableView prefHeight="318.0" prefWidth="158.0">
+                           <columns>
+                              <TableColumn prefWidth="156.66666662693024" text="Mine apparater" />
+                           </columns>
+                        </TableView>
+                        <TextField layoutX="428.0" layoutY="26.0" prefHeight="30.0" prefWidth="157.0" promptText="Navn" />
+                        <TextArea layoutX="427.0" layoutY="79.0" prefHeight="151.0" prefWidth="157.0" promptText="Funksjon" wrapText="true" />
+                        <Button layoutX="425.0" layoutY="263.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="159.0" text="Registrer Apparat" />
+                        <TableView prefHeight="318.0" prefWidth="158.0">
+                           <columns>
+                              <TableColumn prefWidth="156.66666662693024" text="Mine apparater" />
+                           </columns>
+                        </TableView>
+                     </children>
+                  </AnchorPane>
               </content>
             </Tab>
-            <Tab text="Mine øvelsegrupper">
+            <Tab closable="false" text="Mine øvelsegrupper">
               <content>
-                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <TableView prefHeight="279.0" prefWidth="158.0">
+                           <columns>
+                              <TableColumn prefWidth="156.66666662693024" text="Mine øvelsesgrupper" />
+                           </columns>
+                        </TableView>
+                        <TableView layoutX="409.0" layoutY="-1.0" prefHeight="275.0" prefWidth="191.0">
+                           <columns>
+                              <TableColumn prefWidth="156.66666662693024" text="Mine øvelser" />
+                           </columns>
+                        </TableView>
+                        <TextField layoutX="8.0" layoutY="287.0" prefHeight="25.0" prefWidth="146.0" promptText="Navn" />
+                        <Button layoutX="158.0" layoutY="284.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="27.0" text="+" />
+                        <Button layoutX="410.0" layoutY="279.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="188.0" text="Legg til i gruppe" />
+                        <TableView prefHeight="279.0" prefWidth="158.0">
+                           <columns>
+                              <TableColumn prefWidth="156.66666662693024" text="Mine øvelsesgrupper" />
+                           </columns>
+                        </TableView>
+                        <TableView prefHeight="279.0" prefWidth="158.0">
+                           <columns>
+                              <TableColumn prefWidth="156.66666662693024" text="Mine øvelsesgrupper" />
+                           </columns>
+                        </TableView>
+                        <TableView prefHeight="279.0" prefWidth="191.0">
+                           <columns>
+                              <TableColumn prefWidth="189.3333078622818" text="Mine øvelsesgrupper" />
+                           </columns>
+                        </TableView>
+                        <TableView layoutX="194.0" layoutY="1.0" prefHeight="316.0" prefWidth="211.0">
+                           <columns>
+                              <TableColumn prefWidth="208.0000762939453" text="Oversikt" />
+                           </columns>
+                        </TableView>
+                     </children>
+                  </AnchorPane>
               </content>
             </Tab>
         </tabs>
       </TabPane>
+      <AnchorPane prefHeight="200.0" prefWidth="200.0" />
    </children>
 </VBox>
