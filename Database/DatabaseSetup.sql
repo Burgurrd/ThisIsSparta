@@ -14,10 +14,11 @@ DROP TABLE IF EXISTS Treningsøkt;
 
 CREATE TABLE Treningsøkt(
 ØktID INT AUTO_INCREMENT,
-DatoTid DATETIME,
+Dato DATE,
+Tid TIME,
 Varighet TIME,
 Form INT CHECK (Form BETWEEN 1 AND 10),
-Prestasjon INT CHECK (Form BETWEEN 1 AND 10),
+Prestasjon INT CHECK (Prestasjon BETWEEN 1 AND 10),
 Notat TEXT,
 PRIMARY KEY (ØktID)
 );
