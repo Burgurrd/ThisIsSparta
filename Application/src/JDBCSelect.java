@@ -45,7 +45,7 @@ public class JDBCSelect{
     }
 
     public ArrayList getØktListe(String ... s) throws java.lang.ClassNotFoundException{
-        ArrayList<ArrayList<String>> ØktListe = new ArrayList<ArrayList<String>>();
+        ArrayList<ArrayList<Object>> ØktListe = new ArrayList<ArrayList<Object>>();
         try{
             Class.forName("com.mysql.cj.jdbc.Driver");
             Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/treningsdagbok?useSSL=false", "root", "Fittehull2014");
