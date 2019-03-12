@@ -60,7 +60,7 @@
                             <TableColumn prefWidth="153.0" text="Dato og Tid" />
                           </columns>
                         </TableView>
-                        <Slider fx:id="_ØktSlider" layoutX="31.0" layoutY="268.0" prefHeight="18.0" prefWidth="92.0" />
+                        <Slider fx:id="_ØktSlider" blockIncrement="5.0" layoutX="31.0" layoutY="268.0" onDragDropped="#settAntall" prefHeight="18.0" prefWidth="92.0" snapToTicks="true" />
                         <Label fx:id="Antalløkter" layoutX="127.0" layoutY="268.0" text="n" />
                         <TableView fx:id="_Øktoversikt" layoutX="154.0" prefHeight="261.0" prefWidth="446.0">
                           <columns>
