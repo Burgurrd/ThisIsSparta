@@ -21,7 +21,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="411.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="411.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="MainFrameController">
    <children>
       <VBox alignment="BOTTOM_CENTER" prefHeight="68.0" prefWidth="600.0">
          <children>
@@ -55,14 +55,14 @@
               <content>
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
-                        <TableView fx:id="Økter" prefHeight="261.0" prefWidth="154.0">
+                        <TableView fx:id="_Økter" prefHeight="261.0" prefWidth="154.0">
                           <columns>
                             <TableColumn prefWidth="153.0" text="Dato og Tid" />
                           </columns>
                         </TableView>
-                        <Slider fx:id="ØktSlider" layoutX="31.0" layoutY="268.0" prefHeight="18.0" prefWidth="92.0" />
+                        <Slider fx:id="_ØktSlider" layoutX="31.0" layoutY="268.0" prefHeight="18.0" prefWidth="92.0" />
                         <Label fx:id="Antalløkter" layoutX="127.0" layoutY="268.0" text="n" />
-                        <TableView fx:id="Øktoversikt" layoutX="154.0" prefHeight="261.0" prefWidth="446.0">
+                        <TableView fx:id="_Øktoversikt" layoutX="154.0" prefHeight="261.0" prefWidth="446.0">
                           <columns>
                             <TableColumn prefWidth="222.00001525878906" text="Øvelse" />
                             <TableColumn prefWidth="223.99996948242188" text="Resultat/Kommentar" />
@@ -82,7 +82,7 @@
                      <children>
                         <Accordion layoutX="375.0" layoutY="14.0" />
                         <ComboBox fx:id="VelgØvelsesgruppe" layoutX="245.0" layoutY="13.0" prefHeight="25.0" prefWidth="159.0" promptText="Velg øvelsesgruppe" />
-                        <TableView fx:id="ØvelseTabell" layoutX="244.0" layoutY="44.0" prefHeight="199.0" prefWidth="159.0">
+                        <TableView fx:id="_ØvelseTabell" layoutX="244.0" layoutY="44.0" prefHeight="199.0" prefWidth="159.0">
                           <columns>
                             <TableColumn prefWidth="158.00000508626303" text="Øvelser" />
                           </columns>
@@ -92,7 +92,7 @@
                         <DatePicker fx:id="Dato" layoutX="13.0" layoutY="12.0" prefHeight="28.0" prefWidth="209.0" promptText="Dato" />
                         <Label layoutX="14.0" layoutY="58.0" text="Start" />
                         <Button fx:id="RegistrerØkt" layoutX="419.0" layoutY="259.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="166.0" text="Registrer Økt" />
-                        <TableView fx:id="ØktOversikt" layoutX="417.0" layoutY="13.0" prefHeight="232.0" prefWidth="169.0">
+                        <TableView fx:id="_ØktOversikt" layoutX="417.0" layoutY="13.0" prefHeight="232.0" prefWidth="169.0">
                            <columns>
                               <TableColumn prefWidth="87.33331298828125" text="Øvelse" />
                               <TableColumn prefWidth="81.99996948242188" text="Resultat" />
@@ -123,17 +123,17 @@
                               <TableColumn prefWidth="212.66662085056305" text="Mine øvelser" />
                            </columns>
                         </TableView>
-                        <TextField fx:id="ØvelseNavn" layoutX="429.0" layoutY="16.0" prefHeight="30.0" prefWidth="157.0" promptText="Navn" />
+                        <TextField fx:id="_ØvelseNavn" layoutX="429.0" layoutY="16.0" prefHeight="30.0" prefWidth="157.0" promptText="Navn" />
                         <ComboBox fx:id="VelgApparat" layoutX="506.0" layoutY="57.0" prefHeight="25.0" prefWidth="79.0" promptText="Velg apparat" />
-                        <Label fx:id="ApparatAVPÅ" layoutX="431.0" layoutY="61.0" prefHeight="17.0" prefWidth="47.0" text="Apparat" />
+                        <Label layoutX="431.0" layoutY="61.0" prefHeight="17.0" prefWidth="47.0" text="Apparat" />
                         <Button fx:id="RegistrerØvelse" layoutX="428.0" layoutY="268.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="159.0" text="Registrer Øvelse" />
                         <TextArea fx:id="Beskrivelse" layoutX="428.0" layoutY="162.0" prefHeight="95.0" prefWidth="159.0" promptText="Beskriv øvelse" wrapText="true" />
                         <Label layoutX="446.0" layoutY="99.0" text="Kilo" />
                         <Label layoutX="526.0" layoutY="99.0" text="Sett" />
                         <TextField fx:id="Kilo" layoutX="431.0" layoutY="123.0" prefHeight="30.0" prefWidth="73.0" />
                         <TextField fx:id="Sett" layoutX="510.0" layoutY="123.0" prefHeight="30.0" prefWidth="75.0" />
-                        <CheckBox layoutX="484.0" layoutY="61.0" mnemonicParsing="false" />
-                        <TableView fx:id="ØvelseResultat" layoutX="218.0" prefHeight="319.0" prefWidth="191.0">
+                        <CheckBox fx:id="ApparatAVPÅ" layoutX="484.0" layoutY="61.0" mnemonicParsing="false" />
+                        <TableView fx:id="_ØvelseResultat" layoutX="218.0" prefHeight="319.0" prefWidth="191.0">
                            <columns>
                               <TableColumn prefWidth="188.0000762939453" text="Resultater" />
                            </columns>
@@ -146,11 +146,6 @@
               <content>
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
-                        <TableView prefHeight="318.0" prefWidth="158.0">
-                           <columns>
-                              <TableColumn prefWidth="156.66666662693024" text="Mine apparater" />
-                           </columns>
-                        </TableView>
                         <TextField fx:id="ApparatNavn" layoutX="428.0" layoutY="26.0" prefHeight="30.0" prefWidth="157.0" promptText="Navn" />
                         <TextArea fx:id="Funksjon" layoutX="427.0" layoutY="79.0" prefHeight="151.0" prefWidth="157.0" promptText="Funksjon" wrapText="true" />
                         <Button fx:id="RegistrerApparat" layoutX="425.0" layoutY="263.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="159.0" text="Registrer Apparat" />
@@ -168,12 +163,7 @@
               <content>
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
-                        <TableView prefHeight="279.0" prefWidth="158.0">
-                           <columns>
-                              <TableColumn prefWidth="156.66666662693024" text="Mine øvelsesgrupper" />
-                           </columns>
-                        </TableView>
-                        <TableView fx:id="Øvelser" layoutX="409.0" layoutY="-1.0" prefHeight="280.0" prefWidth="191.0">
+                        <TableView fx:id="_Øvelser" layoutX="409.0" layoutY="-1.0" prefHeight="280.0" prefWidth="191.0">
                            <columns>
                               <TableColumn prefWidth="189.99998982747397" text="Mine øvelser" />
                            </columns>
@@ -181,17 +171,7 @@
                         <TextField fx:id="GruppeNavn" layoutX="8.0" layoutY="287.0" prefHeight="25.0" prefWidth="146.0" promptText="Navn" />
                         <Button fx:id="LagGruppe" layoutX="158.0" layoutY="284.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="27.0" text="+" />
                         <Button fx:id="LeggTilIGruppe" layoutX="411.0" layoutY="284.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="188.0" text="Legg til i gruppe" />
-                        <TableView prefHeight="279.0" prefWidth="158.0">
-                           <columns>
-                              <TableColumn prefWidth="156.66666662693024" text="Mine øvelsesgrupper" />
-                           </columns>
-                        </TableView>
-                        <TableView prefHeight="279.0" prefWidth="158.0">
-                           <columns>
-                              <TableColumn prefWidth="156.66666662693024" text="Mine øvelsesgrupper" />
-                           </columns>
-                        </TableView>
-                        <TableView fx:id="Øvelsesgrupper" prefHeight="279.0" prefWidth="191.0">
+                        <TableView fx:id="_Øvelsesgrupper" prefHeight="279.0" prefWidth="191.0">
                            <columns>
                               <TableColumn prefWidth="189.3333078622818" text="Mine øvelsesgrupper" />
                            </columns>
