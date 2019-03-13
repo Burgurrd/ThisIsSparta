@@ -126,8 +126,8 @@
                         <TextArea fx:id="Beskrivelse" layoutX="428.0" layoutY="162.0" prefHeight="95.0" prefWidth="159.0" promptText="Beskriv øvelse" wrapText="true" />
                         <Label layoutX="446.0" layoutY="99.0" text="Kilo" />
                         <Label layoutX="526.0" layoutY="99.0" text="Sett" />
-                        <TextField fx:id="Kilo" layoutX="431.0" layoutY="123.0" prefHeight="30.0" prefWidth="73.0" />
-                        <TextField fx:id="Sett" layoutX="510.0" layoutY="123.0" prefHeight="30.0" prefWidth="75.0" />
+                        <TextField fx:id="Kilo" disable="true" layoutX="431.0" layoutY="123.0" prefHeight="30.0" prefWidth="73.0" />
+                        <TextField fx:id="Sett" disable="true" layoutX="510.0" layoutY="123.0" prefHeight="30.0" prefWidth="75.0" />
                         <CheckBox fx:id="ApparatAVPÅ" layoutX="484.0" layoutY="61.0" mnemonicParsing="false" onAction="#toggleApparat" />
                         <TableView fx:id="_ØvelseResultat" layoutX="218.0" prefHeight="319.0" prefWidth="191.0">
                            <columns>
