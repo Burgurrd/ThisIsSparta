@@ -27,14 +27,14 @@ public class MainFrameController{
 
     @FXML
     public void settAntall(){
-        int i = _ØktSlider.getValue();
+        int i = (int) _ØktSlider.getValue();
         //Bruk i til noe
     }
 
     @FXML
     public void updateAntallLabel(){
-        int i = _ØktSlider.getValue();
-        Antalløkter.setValue(i);
+        int i = (int) _ØktSlider.getValue();
+        Antalløkter.setText(Integer.toString(i));
     }
 
     @FXML
@@ -47,10 +47,7 @@ public class MainFrameController{
         //Dew It!
     }
 
-    @FXML
-    public void delete(){
-        //Dew It!
-    }
+
 
 //--------------------Ny Økt--------------------
 
@@ -101,36 +98,37 @@ public class MainFrameController{
 
     @FXML
     public void settDagsform(){
-        int i = Dagsform.getValue();
+        int i = (int) Dagsform.getValue();
         _dagsform= Integer.toString(i);
     }
 
     @FXML
     public void settPrestasjon(){
-        int i = Prestasjon.getValue();
+        int i = (int) Prestasjon.getValue();
         _prestasjon= Integer.toString(i);
     }
 
     @FXML
-    public void registrer_økt(_økt){
+    public void registrer_økt(){
         //Datetime objekt???
+        _økt += Dato.toString();
         _økt +=",";
-        _økt += StartTid.getValue();
+        _økt += StartTid.getText();
         _økt +=",";
-        _økt += SluttTid.getValue();
+        _økt += SluttTid.getText();
         _økt +=",";
-        _økt += _dagsform.getValue();
+        _økt += _dagsform;
         _økt +=",";
-        _økt += _prestasjon.getValue();
+        _økt += _prestasjon;
         _økt +=",";
-        _økt += Notat.getValue();
+        _økt += Notat.getText();
         _økt +=",";
         //Send _økt og valgteØvelser til parsing i databasekontroller?
         _økt = "";
-        Dagsform.setValue(0);
-        Prestasjon.setValue(0);
+        Dagsform.setValue(5);
+        Prestasjon.setValue(5);
         Notat.clear();
-        Dato.clear();
+        Dato.setValue(null);
         StartTid.clear();
         SluttTid.clear();
         //combobox reset
@@ -182,15 +180,15 @@ public class MainFrameController{
 
     @FXML
     public void registrerØvelse(){
-        _øvelse += _ØvelseNavn.getValue();
+        _øvelse += _ØvelseNavn.getText();
         _øvelse += ",";
         _øvelse += Boolean.toString(_apparatType);
         _øvelse += ",";
-        _øvelse += Kilo.getValue();
+        _øvelse += Kilo.getText();
         _øvelse += ",";
-        _øvelse += Sett.getValue();
+        _øvelse += Sett.getText();
         _øvelse += ",";
-        _øvelse += Beskrivelse.getValue();
+        _øvelse += Beskrivelse.getText();
         _øvelse += ",";
         //combobox ting
         _øvelse += ",";
@@ -226,9 +224,9 @@ public class MainFrameController{
 
     @FXML
     public void registrerApparat(){
-        _apparat += ApparatNavn.getValue();
+        _apparat += ApparatNavn.getText();
         _apparat += ",";
-        _apparat += Funksjon.getValue();
+        _apparat += Funksjon.getText();
         //Send _apparat til parsing i databasekontroller?
         ApparatNavn.clear();
         Funksjon.clear();
@@ -259,8 +257,8 @@ public class MainFrameController{
     }
 
     @FXML
-    public void addØvelse(){
-        __ØvelserIGruppe.add();
+    public void addØvelse(Øvelse ø){
+        __ØvelserIGruppe.add(ø);
     }
 
     @FXML
