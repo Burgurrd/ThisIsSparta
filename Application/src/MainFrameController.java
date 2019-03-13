@@ -10,7 +10,7 @@ import javafx.scene.layout.*;
 
 public class MainFrameController{
 
-    private DBController;
+    private DatabaseController DBController;
 
     public MainFrameController() {
         this.DBController = new DatabaseController();
