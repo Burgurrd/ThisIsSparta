@@ -140,6 +140,9 @@ public class MainFrameController{
 
     public ArrayList<Øvelse> __øvelser = new ArrayList<Øvelse>();
     private Boolean _apparatType = false;
+    private Boolean _Kilo = false;
+    private Boolean _Sett = false;
+    private Boolean _Beskrivelse = true;
     private String _øvelse = "";
     @FXML private TableView MineØvelser;
     @FXML private TableView _ØvelseResultat;
@@ -170,11 +173,23 @@ public class MainFrameController{
     public void toggleApparat(){
         if(_apparatType==false){
             _apparatType = true;
+            _Kilo = true;
+            _Sett = true;
+            _Beskrivelse = false;
             VelgApparat.setDisable(false);
+            Kilo.setDisable(false);
+            Sett.setDisable(false);
+            Beskrivelse.setDisable(true);
         }
         else{
             _apparatType = false;
+            _Kilo = false;
+            _Sett = false;
+            _Beskrivelse = true;
             VelgApparat.setDisable(true);
+            Kilo.setDisable(true);
+            Sett.setDisable(true);
+            Beskrivelse.setDisable(false);
         }
     }
 
@@ -182,16 +197,16 @@ public class MainFrameController{
     public void registrerØvelse(){
         _øvelse += _ØvelseNavn.getText();
         _øvelse += ",";
-        _øvelse += Boolean.toString(_apparatType);
-        _øvelse += ",";
-        _øvelse += Kilo.getText();
-        _øvelse += ",";
-        _øvelse += Sett.getText();
-        _øvelse += ",";
-        _øvelse += Beskrivelse.getText();
-        _øvelse += ",";
-        //combobox ting
-        _øvelse += ",";
+        if(_apparatType){
+            _øvelse += Kilo.getText();
+            _øvelse += ",";
+            _øvelse += Sett.getText();
+            _øvelse += ",";
+            //combobox ting
+        }
+        else{
+            _øvelse += Beskrivelse.getText();
+        }
         //Send _øvelse til parsing i databasekontroller?
         _øvelse = "";
         _ØvelseNavn.clear();
@@ -199,6 +214,9 @@ public class MainFrameController{
         _apparatType = false;
         ApparatAVPÅ.setSelected(false);
         VelgApparat.setDisable(true);
+        Kilo.setDisable(true);
+        Sett.setDisable(true);
+        Beskrivelse.setDisable(false);
         Kilo.clear();
         Sett.clear();
         Beskrivelse.clear();
@@ -255,12 +273,12 @@ public class MainFrameController{
     public void update_Øvelsesgrupper(){
         //Dew It!
     }
-
+/*
     @FXML
-    public void addØvelse(Øvelse ø){
-        __ØvelserIGruppe.add(ø);
+    public void addØvelse(){
+        __ØvelserIGruppe.add();
     }
-
+*/
     @FXML
     public void makeGroup(){
         //Send __ØvelserIGruppe til parsing i databasekontroller?
