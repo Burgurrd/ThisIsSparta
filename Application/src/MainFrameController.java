@@ -123,7 +123,7 @@ public class MainFrameController{
         _økt +=",";
         _økt += Notat.getText();
         _økt +=",";
-        //Send _økt og valgteØvelser til parsing i databasekontroller?
+        DBController.registrerØkt(_økt, valgteØvelser);
         _økt = "";
         Dagsform.setValue(5);
         Prestasjon.setValue(5);
@@ -207,7 +207,7 @@ public class MainFrameController{
         else{
             _øvelse += Beskrivelse.getText();
         }
-        //Send _øvelse til parsing i databasekontroller?
+        DBController.registrerØvelse(_øvelse);
         _øvelse = "";
         _ØvelseNavn.clear();
         //combobox reset
@@ -245,7 +245,7 @@ public class MainFrameController{
         _apparat += ApparatNavn.getText();
         _apparat += ",";
         _apparat += Funksjon.getText();
-        //Send _apparat til parsing i databasekontroller?
+        DBController.registrerApparat(_apparat);
         ApparatNavn.clear();
         Funksjon.clear();
         this.updateMineApparater();
@@ -281,7 +281,7 @@ public class MainFrameController{
 */
     @FXML
     public void makeGroup(){
-        //Send __ØvelserIGruppe til parsing i databasekontroller?
+        DBController.registrerGruppe(__ØvelserIGruppe);
         __ØvelserIGruppe.clear();
         this.update_Øvelsesgrupper();
     }
