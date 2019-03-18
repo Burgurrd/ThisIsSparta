@@ -12,18 +12,95 @@ public class MainFrameController{
 
     private DatabaseController DBController;
 
+//--------------------Mine Økter--------------------
+
+    @FXML private TableView _Økter;
+    @FXML private TableColumn ColDateAndTime;
+
+    public ArrayList<TreningsØkt> __økter = new ArrayList<TreningsØkt>();
+    @FXML private Slider _ØktSlider;
+    @FXML private Label Antalløkter;
+    @FXML private TextArea _ØktBeskrivelse;
+
+//--------------------Ny Økt--------------------
+
+    @FXML private TableView ValgteØvelser;
+    @FXML private TableColumn ColValgteØvelser;
+
+    private ArrayList<Øvelse> valgteØvelser= new ArrayList<Øvelse>();
+    private String _økt = "";
+    private String _dagsform;
+    private String _prestasjon;
+    private Øvelse ValgtØvelse = null;
+    @FXML private ComboBox VelgØvelse;
+    @FXML private Button VelgAktivØvelse;
+    @FXML private TextField StartTid;
+    @FXML private TextField SluttTid;
+    @FXML private DatePicker Dato;
+    @FXML private Button RegistrerØkt;
+    @FXML private Slider Dagsform;
+    @FXML private Slider Prestasjon;
+    @FXML private TextArea Notat;
+    @FXML private TextField VisValgtØvelse;
+
+//--------------------Øvelser--------------------
+
+    public ArrayList<Øvelse> __øvelser = new ArrayList<Øvelse>();
+    private Boolean _apparatType = false;
+    private Boolean _Kilo = false;
+    private Boolean _Sett = false;
+    private Boolean _Beskrivelse = true;
+    private String _øvelse = "";
+    @FXML private TextField _ØvelseNavn;
+    @FXML private ComboBox VelgApparat;
+    @FXML private Button RegistrerØvelse;
+    @FXML private TextArea Beskrivelse;
+    @FXML private TextField Kilo;
+    @FXML private TextField Sett;
+    @FXML private CheckBox ApparatAVPÅ;
+
+//--------------------Apparater--------------------
+
+    @FXML private TableView MineApparater;
+    @FXML private TableColumn ColMineApparater;
+
+    public ArrayList<Apparat> apparater = new ArrayList<Apparat>();
+    private String _apparat = "";
+    @FXML private TextField ApparatNavn;
+    @FXML private TextArea Funksjon;
+    @FXML private Button RegistrerApparat;
+    @FXML private Label ApparatBeskrivelse;
+
+//--------------------Øvelsesgrupper--------------------
+
+    @FXML private TableView _Øvelsesgrupper;
+    @FXML private TableColumn ColMineØvelsesgrupper;
+    @FXML private TableView _Øvelser;
+    @FXML private TableColumn Col_Øvelser;
+
+    public ArrayList<ØvelsesGruppe> __øvelsesgrupper = new ArrayList<ØvelsesGruppe>();
+    @FXML private TextField GruppeNavn;
+    @FXML private Button LagGruppe;
+    @FXML private Button LeggTilIGruppe;
+    @FXML private TextArea GruppeBeskrivelse;
+
+//--------------------Konstruktør--------------------
+
     public MainFrameController() {
         this.DBController = new DatabaseController();
+        ColDateAndTime.setCellValueFactory(new PropertyValueFactory<>("dato"));
+        //_Økter.getColumns().addAll(ColDateAndTime);
+        ColValgteØvelser.setCellValueFactory(new PropertyValueFactory<>("øvelsesnavn"));
+        //ValgteØvelser.getColumns().addAll(ColValgteØvelser);
+        ColMineApparater.setCellValueFactory(new PropertyValueFactory<>("apparatnavn"));
+        //MineApparater.getColumns().addAll(ColMineApparater);
+        ColMineØvelsesgrupper.setCellValueFactory(new PropertyValueFactory<>("øvelsesgruppenavn"));
+        //_Øvelsesgrupper.getColumns().addAll(ColMineØvelsesgrupper);
+        Col_Øvelser.setCellValueFactory(new PropertyValueFactory<>("øvelsesnavn"));
+        //_Øvelser.getColumns().addAll(Col_Øvelser);
     }
 
 //--------------------Mine Økter--------------------
-
-    public ArrayList<TreningsØkt> __økter = new ArrayList<TreningsØkt>();
-    @FXML private TableView _Økter;
-    @FXML private Slider _ØktSlider;
-    @FXML private Label Antalløkter;
-    @FXML private TableView _Øktoversikt;
-    @FXML private Button Slett;
 
     @FXML
     public void settAntall(){
@@ -38,62 +115,41 @@ public class MainFrameController{
     }
 
     @FXML
-    public void updateØkter(){
-        //Dew It!
+    public void updateØkter(TreningsØkt t){
+        _Økter.getItems().add(t);
     }
 
     @FXML
-    public void updateØktoversikt(){
-        //Dew It!
+    public void displayActiveØkt(){
+        TreningsØkt t = _Økter.getSelectionModel().getSelectedItem();
+        _ØktBeskrivelse.setText(t.toString());
     }
-
+    
 
 
 //--------------------Ny Økt--------------------
 
-    private ArrayList<Øvelse> valgteØvelser= new ArrayList<Øvelse>();
-    private String _økt = "";
-    private String _dagsform;
-    private String _prestasjon;
-    @FXML private ComboBox VelgØvelsesgruppe;
-    @FXML private TableView _ØvelseTabell;
-    @FXML private Button VelgØvelse;
-    @FXML private TextField StartTid;
-    @FXML private TextField SluttTid;
-    @FXML private DatePicker Dato;
-    @FXML private Button RegistrerØkt;
-    @FXML private TableView _ØktOversikt;
-    @FXML private Slider Dagsform;
-    @FXML private Slider Prestasjon;
-    @FXML private TextArea Notat;
-    @FXML private Button SlettØvelse;
-
     @FXML
-    public void updateØktOversikt(){
-        //Dew It!
-    }
-
-
-    @FXML
-    public void update_ØvelseTabell(){
-        //Dew It!
+    public void updateØktOversikt(TreningsØkt t){
+        _ØktOversikt.getItems().add(t);
     }
 
     @FXML
-    public void velgØvelsesgruppe(){
-        //Dew It!
-    }
-
-
-    @FXML
-    public void slettØvelse(){
-        //Dew It!
+    public void _øvelseValgt(){
+    ValgtØvelse = //Øvelse med øvelsesnavn: VelgØvelse.getValue();
+    VisValgtØvelse.setText(x.øvelsesnavn);
     }
 
     @FXML
     public void velgØvelse(){
-        //Dew It!
-        this.updateØktOversikt();
+        this.updateØktOversikt(ValgtØvelse);
+        VisValgtØvelse.setText(null);
+        ValgtØvelse = null;
+    }
+
+    @FXML
+    public void _addØvelse(Øvelse t){
+        //add newly registered øvelse to observable list attached to combobox
     }
 
     @FXML
@@ -110,7 +166,6 @@ public class MainFrameController{
 
     @FXML
     public void registrer_økt(){
-        //Datetime objekt???
         _økt += Dato.toString();
         _økt +=",";
         _økt += StartTid.getText();
@@ -123,7 +178,7 @@ public class MainFrameController{
         _økt +=",";
         _økt += Notat.getText();
         _økt +=",";
-        DBController.registrerØkt(_økt, valgteØvelser);
+        t_økt = DBController.registrerØkt(_økt, valgteØvelser);
         _økt = "";
         Dagsform.setValue(5);
         Prestasjon.setValue(5);
@@ -131,42 +186,15 @@ public class MainFrameController{
         Dato.setValue(null);
         StartTid.clear();
         SluttTid.clear();
-        //combobox reset
-        this.updateØkter();
-        this.updateØktoversikt();
+        VelgØvelse.setValue(null);
+        this.updateØkter(t_økt);
     }
 
-//--------------------Mine Øvelser--------------------
-
-    public ArrayList<Øvelse> __øvelser = new ArrayList<Øvelse>();
-    private Boolean _apparatType = false;
-    private Boolean _Kilo = false;
-    private Boolean _Sett = false;
-    private Boolean _Beskrivelse = true;
-    private String _øvelse = "";
-    @FXML private TableView MineØvelser;
-    @FXML private TableView _ØvelseResultat;
-    @FXML private TextField _ØvelseNavn;
-    @FXML private ComboBox VelgApparat;
-    @FXML private Button RegistrerØvelse;
-    @FXML private TextArea Beskrivelse;
-    @FXML private TextField Kilo;
-    @FXML private TextField Sett;
-    @FXML private CheckBox ApparatAVPÅ;
+//--------------------Øvelser--------------------
 
     @FXML
-    public void updateMineØvelser(){
-        //Dew It!
-    }
-
-    @FXML
-    public void update_ØvelseResultat(){
-        //Dew It!
-    }
-
-    @FXML
-    public void addApparat(){
-        //Dew It!
+    public void addApparat(Apparat a){
+        //add newly registered apparat to observable list attached to combobox
     }
 
     @FXML
@@ -202,15 +230,15 @@ public class MainFrameController{
             _øvelse += ",";
             _øvelse += Sett.getText();
             _øvelse += ",";
-            //combobox ting
+            _øvelse += VelgApparat.getValue();
         }
         else{
             _øvelse += Beskrivelse.getText();
         }
-        DBController.registrerØvelse(_øvelse);
+        t_øvelse = DBController.registrerØvelse(_øvelse);
         _øvelse = "";
         _ØvelseNavn.clear();
-        //combobox reset
+        VelgApparat.setValue(null);
         _apparatType = false;
         ApparatAVPÅ.setSelected(false);
         VelgApparat.setDisable(true);
@@ -220,24 +248,21 @@ public class MainFrameController{
         Kilo.clear();
         Sett.clear();
         Beskrivelse.clear();
-        this.updateMineØvelser();
-        this.update_ØvelseTabell();
-        this.update_Øvelser();
+        this.update_Øvelser(t_øvelse);
+        this._addØvelse(t_øvelse);
     }
 
-//--------------------Mine Apparater--------------------
-
-    public ArrayList<Apparat> apparater = new ArrayList<Apparat>();
-    private String _apparat = "";
-    @FXML private TextField ApparatNavn;
-    @FXML private TextArea Funksjon;
-    @FXML private Button RegistrerApparat;
-    @FXML private TableView MineApparater;
-    @FXML private Label ApparatBeskrivelse;
+//--------------------Apparater--------------------
 
     @FXML
-    public void updateMineApparater(){
-        //Dew It!
+    public void updateMineApparater(Apparat a){
+        MineApparater.getItems().add(t);
+    }
+
+    @FXML
+    public void displayActiveApparat(){
+        Apparat a = MineApparater.getSelectionModel().getSelectedItem();
+        ApparatBeskrivelse.setText(a.toString());
     }
 
     @FXML
@@ -245,44 +270,39 @@ public class MainFrameController{
         _apparat += ApparatNavn.getText();
         _apparat += ",";
         _apparat += Funksjon.getText();
-        DBController.registrerApparat(_apparat);
+        t_apparat = DBController.registrerApparat(_apparat);
         ApparatNavn.clear();
         Funksjon.clear();
-        this.updateMineApparater();
-        this.addApparat();
+        this.updateMineApparater(t_apparat);
+        this.addApparat(t_apparat);
     }
 
-//--------------------Mine Øvelsegrupper--------------------
-
-    public ArrayList<ØvelsesGruppe> __øvelsesgrupper = new ArrayList<ØvelsesGruppe>();
-    private ArrayList<Øvelse> __ØvelserIGruppe= new ArrayList<Øvelse>();
-    @FXML private TableView _ØvelsesGrupper;
-    @FXML private TableView Oversikt;
-    @FXML private TableView _Øvelser;
-    @FXML private TextField GruppeNavn;
-    @FXML private Button LagGruppe;
-    @FXML private Button LeggTilIGruppe;
-    @FXML private Button FjernØvelse;
+//--------------------Øvelsesgrupper--------------------
 
     @FXML
-    public void update_Øvelser(){
-        //Dew It!
+    public void update_Øvelser(Øvelse t){
+        _Øvelser.getItems().add(t);
     }
 
     @FXML
-    public void update_Øvelsesgrupper(){
-        //Dew It!
+    public void update_Øvelsesgrupper(ØvelsesGruppe g){
+        _Øvelsesgrupper.getItems().add(g);
     }
-/*
+
     @FXML
     public void addØvelse(){
-        __ØvelserIGruppe.add();
+        __ØvelserIGruppe.add(_Øvelser.getSelectionModel().getSelectedItem());
     }
-*/
+
+    @FXML
+    public void displayActiveGruppe(){
+        ØvelsesGruppe g = _Øvelsesgrupper.getSelectionModel().getSelectedItem();
+        GruppeBeskrivelse.setText(g.toString());
+    }
+
     @FXML
     public void makeGroup(){
-        DBController.registrerGruppe(__ØvelserIGruppe);
-        __ØvelserIGruppe.clear();
-        this.update_Øvelsesgrupper();
+        t_gruppe = DBController.registrerGruppe(GruppeNavn.getText());
+        this.update_Øvelsesgrupper(t_gruppe);
     }
 }
