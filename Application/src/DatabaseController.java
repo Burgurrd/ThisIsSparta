@@ -6,7 +6,7 @@ public class DatabaseController{
 
 
     // hver av disse metodene skal parse strengen og opprette objekter av tilsvarende type, samt legge dem inn i databasen.
-    public TreningsØkt registrerØkt(String s, ArrayList<Øvelse> ø) throws ClassNotFoundException{
+    public TreningsØkt registrerØkt(String s, ArrayList<Øvelse> ø){
         JDBCInsert iC = new JDBCInsert();
         String[] parts = s.split(",");
         String dato = parts[0];
@@ -65,7 +65,7 @@ public class DatabaseController{
         String navn = s;
         ØvelsesGruppe t_gruppe = new ØvelsesGruppe(id, navn);
 
-        return t_gruppe
+        return t_gruppe;
     }
 
 

@@ -78,7 +78,7 @@ public class JDBCInsert {
         }
     }
 
-    public TreningsØkt createØkt(String dato, String starttid, String sluttid, String form, String prestasjon, String notat, ArrayList<Øvelse> a, ArrayList<Øvelse> k) throws java.lang.ClassNotFoundException{
+    public TreningsØkt createØkt(String dato, String starttid, String sluttid, String form, String prestasjon, String notat, ArrayList<Øvelse> a, ArrayList<Øvelse> k) {
         int id = 0;
         try{
             Class.forName("com.mysql.cj.jdbc.Driver");
@@ -115,6 +115,50 @@ public class JDBCInsert {
             conn.close();
             return  t_økt;
         } catch ( Exception e ) {
+            System.err.println( e.getClass().getName() + ": " + e.getMessage() );
+            System.exit(0);
+        }
+
+        return null;
+    }
+
+    public ApparatØvelse createApparatØvelse(String navn, String kilo, String sett, String apparat) {
+        int id = 0;
+        try{
+            Class.forName("com.mysql.cj.jdbc.Driver");
+            Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/treningsdagbok?useSSL=false", "root", "Fittehull2014");
+
+            PreparedStatement stmt = conn.prepareStatement("insert into treningsøkt(dato, starttid, slutttid, form, prestasjon, notat) values (?, ?, ?, ?, ?, ?)", Statement.RETURN_GENERATED_KEYS );
+            Date date = new SimpleDateFormat("yyyy-mm-dd").parse(dato);
+            java.sql.Date _date = new java.sql.Date(date.getTime());
+            stmt.setDate(1, _date);
+            Date startTime = new SimpleDateFormat("hh:mm").parse(starttid);
+            java.sql.Time _time = new java.sql.Time(startTime.getTime());
+            Date endTime = new SimpleDateFormat("hh:mm").parse(starttid);
+            java.sql.Time _time1 = new java.sql.Time(startTime.getTime());
+            stmt.setTime(2, _time);
+            stmt.setTime(3, _time1);
+            int _form = Integer.parseInt(form);
+            stmt.setInt(4, _form);
+            int _prest = Integer.parseInt(prestasjon);
+            stmt.setInt(5, _prest);
+            stmt.setString(6, notat);
+            //ØktID returneres etter at "insert"-spørringen utføres.
+            id = stmt.executeUpdate();
+            ArrayList<Øvelse> øvelser = new ArrayList<>();
+            øvelser.addAll(a);
+            øvelser.addAll(k);
+            createØktØvelserRelasjon(id, a, k);
+            TreningsØkt t_økt = new TreningsØkt(id,_date, _time, _time1, _form, _prest, notat, øvelser);
+
+            if (debug){
+                System.out.println(t_økt);
+                System.out.println("a:\t" + a + "\tk:\t" + k);
+            }
+            stmt.close();
+            conn.close();
+            return  t_økt;
+        } catch (Exception e ) {
             System.err.println( e.getClass().getName() + ": " + e.getMessage() );
             System.exit(0);
         }
