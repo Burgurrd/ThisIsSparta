@@ -88,6 +88,8 @@ public class MainFrameController{
 
 //--------------------Konstruktør--------------------
 
+//Konstruktøren oppretter tabellene og instanserer/kobler til databasekontrolleren
+//De kommenterte linjene trengs kanskje
     public MainFrameController() {
         this.DBController = new DatabaseController();
         ColDateAndTime.setCellValueFactory(new PropertyValueFactory<>("dato"));
@@ -105,26 +107,26 @@ public class MainFrameController{
 //--------------------Mine Økter--------------------
 
     @FXML
-    public void settAntall(){
+    public void settAntall(){//metode i databsekontroller for å sette antall økter som vises
         int i = (int) _ØktSlider.getValue();
-        //Bruk i til noe
+        DBController.setAmount(i);  //denne metoden i DBkontroller må legges til!
     }
 
     @FXML
-    public void updateAntallLabel(){
+    public void updateAntallLabel(){//oppdaterer label i FXML
         int i = (int) _ØktSlider.getValue();
-        Antalløkter.setText(Integer.toString(i));
+        Antalløkter.setText(Integer.toString(i)); 
     }
 
     @FXML
-    public void updateØkter(TreningsØkt t){
-        _Økter.getItems().add(t);
+    public void updateØkter(TreningsØkt t){//Legger til lagd økt i tabell
+        _Økter.getItems().add(t); 
     }
 
     @FXML
-    public void displayActiveØkt(){
+    public void displayActiveØkt(){//Viser beskrivelse av økt i form av øktens tostring metode
         TreningsØkt t = _Økter.getSelectionModel().getSelectedItem();
-        _ØktBeskrivelse.setText(t.toString());
+        _ØktBeskrivelse.setText(t.toString()); 
     }
     
 
@@ -132,42 +134,42 @@ public class MainFrameController{
 //--------------------Ny Økt--------------------
 
     @FXML
-    public void updateØktOversikt(TreningsØkt t){
-        _ØktOversikt.getItems().add(t);
+    public void updateØktOversikt(TreningsØkt t){//Legger til lagd økt i tabell
+        _ØktOversikt.getItems().add(t); 
     }
 
     @FXML
-    public void _øvelseValgt(){
+    public void _øvelseValgt(){//Setter label til å vise valgt øvelse
     ValgtØvelse = //Øvelse med øvelsesnavn: VelgØvelse.getValue();
-    VisValgtØvelse.setText(x.øvelsesnavn);
+    VisValgtØvelse.setText(x.øvelsesnavn); 
     }
 
     @FXML
-    public void velgØvelse(){
+    public void velgØvelse(){//knapp som legger til øvelse i liste tilhørende økt som skal registreres
         this.updateØktOversikt(ValgtØvelse);
         VisValgtØvelse.setText(null);
         ValgtØvelse = null;
     }
 
     @FXML
-    public void _addØvelse(Øvelse t){
+    public void _addØvelse(Øvelse t){//Tror ikke denne brukes lengre...
         listØvelse.add(t);
     }
 
     @FXML
-    public void settDagsform(){
+    public void settDagsform(){//setter variabel til sliders verdi
         int i = (int) Dagsform.getValue();
         _dagsform= Integer.toString(i);
     }
 
     @FXML
-    public void settPrestasjon(){
+    public void settPrestasjon(){//setter variabel til sliders verdi
         int i = (int) Prestasjon.getValue();
         _prestasjon= Integer.toString(i);
     }
 
     @FXML
-    public void registrer_økt(){
+    public void registrer_økt(){//registrerer økten og legger den til i tabell(er)
         _økt += Dato.toString();
         _økt +=",";
         _økt += StartTid.getText();
@@ -180,7 +182,7 @@ public class MainFrameController{
         _økt +=",";
         _økt += Notat.getText();
         _økt +=",";
-        t_økt = DBController.registrerØkt(_økt, valgteØvelser);
+        t_økt = DBController.registrerØkt(_økt, valgteØvelser); //her kalles registreringsmetode som returnerer øktobjekt
         _økt = "";
         Dagsform.setValue(5);
         Prestasjon.setValue(5);
@@ -195,12 +197,12 @@ public class MainFrameController{
 //--------------------Øvelser--------------------
 
     @FXML
-    public void addApparat(Apparat a){
+    public void addApparat(Apparat a){//ubrukt metode kanskje
         listApparat.add(a);
     }
 
     @FXML
-    public void toggleApparat(){
+    public void toggleApparat(){//enabler/disabler felt basert på checkbox
         if(_apparatType==false){
             _apparatType = true;
             _Kilo = true;
@@ -224,7 +226,7 @@ public class MainFrameController{
     }
 
     @FXML
-    public void registrerØvelse(){
+    public void registrerØvelse(){//registrerer øvelse og legger til i tabell(er)
         _øvelse += _ØvelseNavn.getText();
         _øvelse += ",";
         if(_apparatType){
@@ -237,7 +239,7 @@ public class MainFrameController{
         else{
             _øvelse += Beskrivelse.getText();
         }
-        t_øvelse = DBController.registrerØvelse(_øvelse);
+        t_øvelse = DBController.registrerØvelse(_øvelse); //her kalles registreringsmetode som returnerer øvelseobjekt
         _øvelse = "";
         _ØvelseNavn.clear();
         VelgApparat.setValue(null);
@@ -257,22 +259,22 @@ public class MainFrameController{
 //--------------------Apparater--------------------
 
     @FXML
-    public void updateMineApparater(Apparat a){
+    public void updateMineApparater(Apparat a){//Legger til apparat i tilhørende tabell
         MineApparater.getItems().add(t);
     }
 
     @FXML
-    public void displayActiveApparat(){
+    public void displayActiveApparat(){//Viser beskrivelse av apparat via apparatets tostring metode
         Apparat a = MineApparater.getSelectionModel().getSelectedItem();
         ApparatBeskrivelse.setText(a.toString());
     }
 
     @FXML
-    public void registrerApparat(){
+    public void registrerApparat(){//registrerer apparat og legger til i tabell(er)
         _apparat += ApparatNavn.getText();
         _apparat += ",";
         _apparat += Funksjon.getText();
-        t_apparat = DBController.registrerApparat(_apparat);
+        t_apparat = DBController.registrerApparat(_apparat);//her kalles registreringsmetode som returnerer apparatobjekt
         ApparatNavn.clear();
         Funksjon.clear();
         this.updateMineApparater(t_apparat);
@@ -282,29 +284,29 @@ public class MainFrameController{
 //--------------------Øvelsesgrupper--------------------
 
     @FXML
-    public void update_Øvelser(Øvelse t){
+    public void update_Øvelser(Øvelse t){//Legger til øvelse i tilhørende tabell
         _Øvelser.getItems().add(t);
     }
 
     @FXML
-    public void update_Øvelsesgrupper(ØvelsesGruppe g){
+    public void update_Øvelsesgrupper(ØvelsesGruppe g){//Legger til øvelsesgruppe i tilhørende tabell
         _Øvelsesgrupper.getItems().add(g);
     }
 
     @FXML
-    public void addØvelse(){
+    public void addØvelse(){//Legger til øvelse valgt i tabell til øvelsesgruppe
         __ØvelserIGruppe.add(_Øvelser.getSelectionModel().getSelectedItem());
     }
 
     @FXML
-    public void displayActiveGruppe(){
+    public void displayActiveGruppe(){//Viser beskrivelse av gruppe via gruppens tostring metode
         ØvelsesGruppe g = _Øvelsesgrupper.getSelectionModel().getSelectedItem();
         GruppeBeskrivelse.setText(g.toString());
     }
 
     @FXML
-    public void makeGroup(){
-        t_gruppe = DBController.registrerGruppe(GruppeNavn.getText());
+    public void makeGroup(){//oppretter gruppe med navn og oppdaterer tabell
+        t_gruppe = DBController.registrerGruppe(GruppeNavn.getText());//her kalles registreringsmetode som returnerer gruppeobjekt
         this.update_Øvelsesgrupper(t_gruppe);
     }
 }
