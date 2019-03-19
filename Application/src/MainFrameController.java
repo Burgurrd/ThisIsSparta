@@ -33,6 +33,7 @@ public class MainFrameController{
     private String _prestasjon;
     private Øvelse ValgtØvelse = null;
     @FXML private ComboBox VelgØvelse;
+    public ObservableList<Øvelse> listØvelse = FXCollections.observableArrayList();
     @FXML private Button VelgAktivØvelse;
     @FXML private TextField StartTid;
     @FXML private TextField SluttTid;
@@ -53,6 +54,7 @@ public class MainFrameController{
     private String _øvelse = "";
     @FXML private TextField _ØvelseNavn;
     @FXML private ComboBox VelgApparat;
+    public ObservableList<Apparat> listApparat = FXCollections.observableArrayList();
     @FXML private Button RegistrerØvelse;
     @FXML private TextArea Beskrivelse;
     @FXML private TextField Kilo;
@@ -149,7 +151,7 @@ public class MainFrameController{
 
     @FXML
     public void _addØvelse(Øvelse t){
-        //add newly registered øvelse to observable list attached to combobox
+        listØvelse.add(t);
     }
 
     @FXML
@@ -194,7 +196,7 @@ public class MainFrameController{
 
     @FXML
     public void addApparat(Apparat a){
-        //add newly registered apparat to observable list attached to combobox
+        listApparat.add(a);
     }
 
     @FXML
