@@ -1,5 +1,8 @@
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.effect.*;
 import javafx.scene.text.*;
 import java.lang.*;
@@ -169,7 +172,7 @@ public class MainFrameController{
     }
 
     @FXML
-    public void registrer_økt(){//registrerer økten og legger den til i tabell(er)
+    public void registrer_økt() throws ClassNotFoundException {//registrerer økten og legger den til i tabell(er)
         _økt += Dato.toString();
         _økt +=",";
         _økt += StartTid.getText();
@@ -182,7 +185,7 @@ public class MainFrameController{
         _økt +=",";
         _økt += Notat.getText();
         _økt +=",";
-        t_økt = DBController.registrerØkt(_økt, valgteØvelser); //her kalles registreringsmetode som returnerer øktobjekt
+        TreningsØkt t_økt = DBController.registrerØkt(_økt, valgteØvelser); //her kalles registreringsmetode som returnerer øktobjekt
         _økt = "";
         Dagsform.setValue(5);
         Prestasjon.setValue(5);

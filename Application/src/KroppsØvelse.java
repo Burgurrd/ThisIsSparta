@@ -4,7 +4,7 @@ public class KroppsØvelse extends Øvelse {
     private String navn, beskrivelse;
 
     public KroppsØvelse(int ID, String navn, String beskrivelse){
-        super();
+        super(ID,false);
         this.kroppsØvelseID = ID;
         this.navn = navn;
         this.beskrivelse = beskrivelse;

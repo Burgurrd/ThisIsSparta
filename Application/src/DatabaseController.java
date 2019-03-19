@@ -1,11 +1,13 @@
 import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.Date;
 
 public class DatabaseController{
 
 
     // hver av disse metodene skal parse strengen og opprette objekter av tilsvarende type, samt legge dem inn i databasen.
-    public void registrerØkt(String s, ArrayList<Øvelse> a) {
+    public TreningsØkt registrerØkt(String s, ArrayList<Øvelse> ø) throws ClassNotFoundException{
+        JDBCInsert iC = new JDBCInsert();
         String[] parts = s.split(",");
         String dato = parts[0];
         String StartTid = parts[1];
@@ -13,9 +15,17 @@ public class DatabaseController{
         String Dagsform = parts[3];
         String Prestasjon = parts[4];
         String Notat = parts[5];
-        ArrayList<Øvelse> _Øvelser = a;
-
-
+        ArrayList<Øvelse> a = new ArrayList<>();
+        ArrayList<Øvelse> k = new ArrayList<>();
+        for (Øvelse i : ø) {
+            if (i.isApparatØvelse) {
+                a.add(i);
+            } else {
+                k.add(i);
+            }
+        }
+        TreningsØkt t_ø = iC.createØkt(dato, StartTid, SluttTid, Dagsform, Prestasjon, Notat, a,k);
+        return t_ø;
     }
 
     public void registrerØvelse(String s) {
@@ -53,6 +63,9 @@ public class DatabaseController{
 
     public void registrerGruppe(String s){
         String navn = s;
+        ØvelsesGruppe t_gruppe = new ØvelsesGruppe(id, navn);
+
+        return t_gruppe
     }
 
 

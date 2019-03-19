@@ -45,7 +45,7 @@ public class JDBCSelect{
     }
 
     public ArrayList getØktListe(String ... s) throws java.lang.ClassNotFoundException{
-        ArrayList<ArrayList<Object>> ØktListe = new ArrayList<ArrayList<Object>>();
+        ArrayList<ArrayList<String>> ØktListe = new ArrayList<ArrayList<String>>();
         try{
             Class.forName("com.mysql.cj.jdbc.Driver");
             Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/treningsdagbok?useSSL=false", "root", "Fittehull2014");
@@ -67,8 +67,8 @@ public class JDBCSelect{
             while ( rs.next() ) {
                 int øktID = rs.getInt("ØktID");
                 Date dato = rs.getDate("Dato");
-                Time tid = rs.getTime("Tid");
-                Time varighet = rs.getTime("Varighet");
+                Time tid = rs.getTime("StartTid");
+                Time varighet = rs.getTime("SluttTid");
                 int form = rs.getInt("Form");
                 int prestasjon = rs.getInt("Prestasjon");
                 String notat = rs.getString("Notat");

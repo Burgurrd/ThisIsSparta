@@ -1,21 +1,27 @@
 import java.sql.Date;
 import java.sql.Time;
+import java.util.ArrayList;
 
 public class TreningsØkt {
 
     private int øktID, form, prestasjon;
     private Date dato;
-    private Time tid, varighet;
+    private Time startTid, sluttTid;
     private String notat;
+    private ArrayList<Øvelse> øvelser;
 
-    public TreningsØkt(int øktID, int form, int prestasjon, Date dato, Time tid, Time varighet, String notat) {
+    public TreningsØkt(int øktID, Date dato, Time startTid, Time sluttTid, int form, int prestasjon, String notat, ArrayList<Øvelse> øvelser) {
         this.øktID = øktID;
         this.dato = dato;
-        this.tid = tid;
-        this.varighet = varighet;
+        this.startTid = startTid;
+        this.sluttTid = sluttTid;
         this.form = form;
         this.prestasjon = prestasjon;
         this.notat = notat;
+        this.øvelser = øvelser;
+    }
+    public TreningsØkt getTreningsøkt(){
+        return this;
     }
 
     public int getØktID() {
@@ -50,27 +56,33 @@ public class TreningsØkt {
         this.dato = dato;
     }
 
-    public Time getTid() {
-        return tid;
+    public Time getStartTid() {
+        return startTid;
     }
 
-    public void setTid(Time tid) {
-        this.tid = tid;
+    public void setStartTid(Time startTid) {
+        this.startTid = startTid;
     }
 
-    public Time getVarighet() {
-        return varighet;
+    public Time getSluttTid() {
+        return sluttTid;
     }
 
-    public void setVarighet(Time varighet) {
-        this.varighet = varighet;
+    public void setSluttTid(Time sluttTid) {
+        this.sluttTid = sluttTid;
     }
 
     public String getNotat() {
         return notat;
     }
 
-    public void setNotat(String notat) {
-        this.notat = notat;
+    public void setNotat(String notat) { this.notat = notat; }
+
+    public ArrayList<Øvelse> getØvelser() {
+        return øvelser;
+    }
+
+    public void setØvelser(ArrayList<Øvelse> øvelser) {
+        this.øvelser = øvelser;
     }
 }
