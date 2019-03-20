@@ -62,7 +62,8 @@ public class TextUI {
     }
 
     public void MineØkter_VisØkter() {//Viser et gitt antall økter med dato og navn
-        for (TreningsØkt elem : DBC._registrerteØkter) {
+        for (int i = 0; i<DBC._antallØkter;i++){
+            TreningsØkt elem = DBC._registrerteØkter.get(i);
             System.out.println("---------------------------------------------------------------------");
             System.out.println(elem.getDato());//elem.dateString);
             System.out.println(elem.getØktID());//elem.nameString);
