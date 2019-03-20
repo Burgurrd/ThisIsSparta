@@ -92,8 +92,15 @@ public class DatabaseController{
         return ø;
     }
 
-    public void setAmount(int i){
-        this._antallØkter = i;
+    public boolean setAmount(int i){
+        if (i <= this._registrerteØkter.size()){
+            this._antallØkter = i;
+            return true;
+        }
+        else{
+            this._antallØkter = this._registrerteØkter.size();
+            return false;
+        }
     }
 
 

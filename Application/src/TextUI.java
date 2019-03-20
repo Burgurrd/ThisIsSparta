@@ -57,8 +57,13 @@ public class TextUI {
             MineØkter_Main();
         }
         int amount = Integer.parseInt(x);
-        DBC.setAmount(amount);
-        MineØkter_Main();
+        if (!(DBC.setAmount(amount))){
+            System.out.println("ERROR: Det er bare " + DBC._antallØkter + " antall økter registrert.");
+            MineØkter_SettAntall();
+        }
+        else {
+            MineØkter_Main();
+        }
     }
 
     public void MineØkter_VisØkter() {//Viser et gitt antall økter med dato og navn
