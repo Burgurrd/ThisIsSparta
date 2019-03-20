@@ -28,10 +28,8 @@ public class JDBCSelect{
                 int apparatID = rs.getInt("ApparatID");
                 String navn = rs.getString("Navn");
                 String  funksjon = rs.getString("Funksjon");
-                ArrayList row = new ArrayList();
-                row.add(apparatID);
-                row.add(navn);
-                row.add(funksjon);
+                Apparat a = new Apparat(apparatID, navn, funksjon);
+                ApparatListe.add(a);
 //                ApparatListe.add(row);
                 if (debug){
                     System.out.println("ApparatID: " + apparatID + "\tNavn: " + navn + "\tFunksjon: " + funksjon);

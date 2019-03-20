@@ -12,10 +12,15 @@ public class DatabaseController{
     public ArrayList<TreningsØkt> _registrerteØkter = new ArrayList<TreningsØkt>();
     public JDBCInsert iC;
     public JDBCSelect sC;
+
+
     public DatabaseController(){
         this.iC = new JDBCInsert();
         this.sC = new JDBCSelect();
         this._registrerteØkter.addAll(sC.getØktListe());
+        this._antallØkter = this._registrerteØkter.size();
+        this._registrerteApparater.addAll(sC.getApparatListe());
+
         //update all Lists
 
 
