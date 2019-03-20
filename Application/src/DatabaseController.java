@@ -9,15 +9,20 @@ public class DatabaseController{
     public ArrayList<Øvelse> _registrerteApparatØvelser = new ArrayList<Øvelse>();
     public ArrayList<Apparat> _registrerteApparater = new ArrayList<Apparat>();
     public ArrayList<ØvelsesGruppe> _registrerteGrupper = new ArrayList<ØvelsesGruppe>();
-
+    public JDBCInsert iC;
+    public JDBCSelect sC;
     public DatabaseController(){
+        this.iC = new JDBCInsert();
+        this.sC = new JDBCSelect();
+        øl = sC.getØktListe()
+
         //update all Lists
+
 
 
     }
     // hver av disse metodene skal parse strengen og opprette objekter av tilsvarende type, samt legge dem inn i databasen.
     public TreningsØkt registrerØkt(String s, ArrayList<Øvelse> ø){
-        JDBCInsert iC = new JDBCInsert();
         String[] parts = s.split(",");
         String dato = parts[0];
         String StartTid = parts[1];
@@ -52,7 +57,6 @@ public class DatabaseController{
     }
 
     public ApparatØvelse registrerApparatØvelse(String s) {
-        JDBCInsert iC = new JDBCInsert();
         String[] parts = s.split(",");
         String navn = parts[0];
         String kilo = parts[1];
@@ -64,7 +68,6 @@ public class DatabaseController{
     }
 
     public KroppsØvelse registrerKroppsØvelse(String s) {
-        JDBCInsert iC = new JDBCInsert();
         String[] parts = s.split(",");
         String navn = parts[0];
         String beskrivelse = parts[1];
@@ -74,7 +77,6 @@ public class DatabaseController{
     }
 
     public Apparat registrerApparat(String s) {
-        JDBCInsert iC = new JDBCInsert();
         String[] parts = s.split(",");
         String navn = parts[0];
         String funkjson = parts[1];
@@ -84,7 +86,6 @@ public class DatabaseController{
     }
 
     public ØvelsesGruppe registrerGruppe(String s){
-        JDBCInsert iC = new JDBCInsert();
         String navn = s;
         ØvelsesGruppe ø = iC.createGruppe(navn);
         this._registrerteGrupper.add(ø);

@@ -13,12 +13,16 @@ import java.util.Date;
 public class JDBCInsert {
 
     public static boolean debug = true;
+    public String url = "jdbc:mysql://localhost:3306/treningsdagbok?useSSL=false";
+    public String u = "root";
+    public String pw = "Fittehull2014";
+
 
     public void createØktØvelserRelasjon(int id, ArrayList<Øvelse> a, ArrayList<Øvelse> k){
        for (Øvelse ø : a){
             try {
                 Class.forName("com.mysql.cj.jdbc.Driver");
-                Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/treningsdagbok?useSSL=false", "root", "Fittehull2014");
+                Connection conn = DriverManager.getConnection(url, u, pw);
 
                 PreparedStatement stmt = conn.prepareStatement("insert into apparatøvelseiøkt(øktid, apparatøvelseid) values (?, ?)", Statement.RETURN_GENERATED_KEYS);
                 stmt.setInt(1, id);
@@ -36,7 +40,7 @@ public class JDBCInsert {
         for (Øvelse ø : k){
             try {
                 Class.forName("com.mysql.cj.jdbc.Driver");
-                Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/treningsdagbok?useSSL=false", "root", "Fittehull2014");
+                Connection conn = DriverManager.getConnection(url, u, pw);
 
                 PreparedStatement stmt = conn.prepareStatement("insert into kroppsøvelseiøkt(øktid, KroppsØvelseID) values (?, ?)", Statement.RETURN_GENERATED_KEYS);
                 stmt.setInt(1, id);
@@ -56,7 +60,7 @@ public class JDBCInsert {
     public TreningsØkt createØkt(String dato, String starttid, String sluttid, String form, String prestasjon, String notat, ArrayList<Øvelse> a, ArrayList<Øvelse> k) {
         try{
             Class.forName("com.mysql.cj.jdbc.Driver");
-            Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/treningsdagbok?useSSL=false", "root", "Fittehull2014");
+            Connection conn = DriverManager.getConnection(url, u, pw);
 
             PreparedStatement stmt = conn.prepareStatement("insert into treningsøkt(dato, starttid, slutttid, form, prestasjon, notat) values (?, ?, ?, ?, ?, ?)", Statement.RETURN_GENERATED_KEYS );
             Date date = new SimpleDateFormat("dd.mm.yy").parse(dato);
@@ -100,7 +104,7 @@ public class JDBCInsert {
 
         try{
             Class.forName("com.mysql.cj.jdbc.Driver");
-            Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/treningsdagbok?useSSL=false", "root", "Fittehull2014");
+            Connection conn = DriverManager.getConnection(url, u, pw);
 
             PreparedStatement stmt = conn.prepareStatement("insert into apparatøvelse(Navn, Kilo, Sett, ApparatID) values ( ?, ?, ?, ?)", Statement.RETURN_GENERATED_KEYS );
             stmt.setString(1,navn);
@@ -130,7 +134,7 @@ public class JDBCInsert {
 
         try{
             Class.forName("com.mysql.cj.jdbc.Driver");
-            Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/treningsdagbok?useSSL=false", "root", "Fittehull2014");
+            Connection conn = DriverManager.getConnection(url, u, pw);
 
             PreparedStatement stmt = conn.prepareStatement("insert into kroppsøvelse(Navn, Beskrivelse) values ( ?, ?)", Statement.RETURN_GENERATED_KEYS );
             stmt.setString(1,navn);
@@ -154,7 +158,7 @@ public class JDBCInsert {
     public Apparat createApparat(String navn, String funksjon) {
         try{
             Class.forName("com.mysql.cj.jdbc.Driver");
-            Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/treningsdagbok?useSSL=false", "root", "Fittehull2014");
+            Connection conn = DriverManager.getConnection(url, u, pw);
 
             PreparedStatement stmt = conn.prepareStatement("insert into apparat(Navn, Funksjon) values ( ?, ?)", Statement.RETURN_GENERATED_KEYS );
             stmt.setString(1,navn);
@@ -177,7 +181,7 @@ public class JDBCInsert {
     public ØvelsesGruppe createGruppe(String navn) {
         try{
             Class.forName("com.mysql.cj.jdbc.Driver");
-            Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/treningsdagbok?useSSL=false", "root", "Fittehull2014");
+            Connection conn = DriverManager.getConnection(url, u, pw);
 
             PreparedStatement stmt = conn.prepareStatement("insert into øvelsesgruppe(Navn) values (?)", Statement.RETURN_GENERATED_KEYS );
             stmt.setString(1,navn);
@@ -196,9 +200,5 @@ public class JDBCInsert {
         return null;
     }
 
-
-    public static void main(String[] args)  {
-
-    }
 }
 
