@@ -1,5 +1,7 @@
 import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.Date;
 
 public class DatabaseController{
@@ -18,6 +20,7 @@ public class DatabaseController{
         this.iC = new JDBCInsert();
         this.sC = new JDBCSelect();
         this._registrerteØkter.addAll(sC.getØktListe());
+        Collections.sort(_registrerteØkter, øktC);
         this._antallØkter = this._registrerteØkter.size();
         this._registrerteApparater.addAll(sC.getApparatListe());
 
@@ -107,6 +110,13 @@ public class DatabaseController{
             return false;
         }
     }
+
+    Comparator<TreningsØkt> øktC = new Comparator<TreningsØkt>() {
+        @Override
+        public int compare(TreningsØkt o1, TreningsØkt o2) {
+            return o2.getDato().compareTo(o1.getDato());
+        }
+    };
 
 
 
