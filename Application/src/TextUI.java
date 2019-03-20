@@ -156,7 +156,7 @@ public class TextUI {
                     cnt += 1;
                 }
             }
-            if(cnt== (DBC._registrerteApparatØvelser.size()+DBC._registrerteKroppsØvelser.size())){
+            if(cnt == (DBC._registrerteApparatØvelser.size()+DBC._registrerteKroppsØvelser.size())){
                 System.out.println("Øvelse ikke funnet, ble ikke lagt til");
             }
             System.out.println("Legg til øvelse: (Navn på øvelse, 'Ferdig' avslutter valget)");
@@ -220,9 +220,14 @@ public class TextUI {
             while(idiot==true){
                 System.out.println("Apparat: ");
                 String x = inp.nextLine().toString();
+//                System.out.println("x:\t" + x);
+//                System.out.println("x.getclass:\t" + x.getClass());
                 for(Apparat a : DBC._registrerteApparater){
+//                    System.out.println(a.getNavn());
                     if(x.toString().equalsIgnoreCase(a.getNavn().toString())){
-                        øvelse += x;
+
+                        øvelse += a.getApparatID();
+
                         idiot = false;
                     }
                     else{

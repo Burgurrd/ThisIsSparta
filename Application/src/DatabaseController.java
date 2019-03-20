@@ -39,6 +39,7 @@ public class DatabaseController{
     }
 
     public Øvelse registrerØvelse(String s) {
+        System.out.println("registrerer øvelse med streng:\n" + s);
         String[] parts = s.split(",");
 
         if (parts.length == 2){

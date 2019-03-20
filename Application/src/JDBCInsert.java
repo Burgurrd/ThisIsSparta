@@ -59,12 +59,12 @@ public class JDBCInsert {
             Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/treningsdagbok?useSSL=false", "root", "Fittehull2014");
 
             PreparedStatement stmt = conn.prepareStatement("insert into treningsøkt(dato, starttid, slutttid, form, prestasjon, notat) values (?, ?, ?, ?, ?, ?)", Statement.RETURN_GENERATED_KEYS );
-            Date date = new SimpleDateFormat("yyyy-mm-dd").parse(dato);
+            Date date = new SimpleDateFormat("dd.mm.yy").parse(dato);
             java.sql.Date _date = new java.sql.Date(date.getTime());
             stmt.setDate(1, _date);
-            Date startTime = new SimpleDateFormat("hh:mm").parse(starttid);
+            Date startTime = new SimpleDateFormat("hh.mm").parse(starttid);
             java.sql.Time _time = new java.sql.Time(startTime.getTime());
-            Date endTime = new SimpleDateFormat("hh:mm").parse(starttid);
+            Date endTime = new SimpleDateFormat("hh.mm").parse(starttid);
             java.sql.Time _time1 = new java.sql.Time(startTime.getTime());
             stmt.setTime(2, _time);
             stmt.setTime(3, _time1);
