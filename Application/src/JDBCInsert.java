@@ -14,31 +14,6 @@ public class JDBCInsert {
 
     public static boolean debug = true;
 
-    public ArrayList<Object> createApparat(String navn, String funksjon) throws java.lang.ClassNotFoundException{
-        ArrayList<Object> ApparatListe = new ArrayList<Object>();
-
-        try{
-            Class.forName("com.mysql.cj.jdbc.Driver");
-            Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/treningsdagbok?useSSL=false", "root", "Fittehull2014");
-
-            PreparedStatement stmt = conn.prepareStatement("insert into apparat(Navn,Funksjon) values(?, ?)", Statement.RETURN_GENERATED_KEYS);
-            stmt.setString(1, navn);
-            stmt.setString(2, funksjon);
-            int id = stmt.executeUpdate();
-            ApparatListe.add(id);
-            ApparatListe.add(navn);
-            ApparatListe.add(funksjon);
-            stmt.close();
-            conn.close();
-        } catch ( Exception e ) {
-            System.err.println(e.getClass().getName() + ": " + e.getMessage());
-            System.exit(0);
-        }
-        return ApparatListe ;
-    }
-
-
-
     public void createØktØvelserRelasjon(int id, ArrayList<Øvelse> a, ArrayList<Øvelse> k){
        for (Øvelse ø : a){
             try {
@@ -79,7 +54,6 @@ public class JDBCInsert {
     }
 
     public TreningsØkt createØkt(String dato, String starttid, String sluttid, String form, String prestasjon, String notat, ArrayList<Øvelse> a, ArrayList<Øvelse> k) {
-        int id = 0;
         try{
             Class.forName("com.mysql.cj.jdbc.Driver");
             Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/treningsdagbok?useSSL=false", "root", "Fittehull2014");
@@ -100,7 +74,7 @@ public class JDBCInsert {
             stmt.setInt(5, _prest);
             stmt.setString(6, notat);
             //ØktID returneres etter at "insert"-spørringen utføres.
-            id = stmt.executeUpdate();
+            int id = stmt.executeUpdate();
             ArrayList<Øvelse> øvelser = new ArrayList<>();
             øvelser.addAll(a);
             øvelser.addAll(k);
@@ -123,58 +97,108 @@ public class JDBCInsert {
     }
 
     public ApparatØvelse createApparatØvelse(String navn, String kilo, String sett, String apparat) {
-        int id = 0;
+
         try{
             Class.forName("com.mysql.cj.jdbc.Driver");
             Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/treningsdagbok?useSSL=false", "root", "Fittehull2014");
 
-            PreparedStatement stmt = conn.prepareStatement("insert into treningsøkt(dato, starttid, slutttid, form, prestasjon, notat) values (?, ?, ?, ?, ?, ?)", Statement.RETURN_GENERATED_KEYS );
-            Date date = new SimpleDateFormat("yyyy-mm-dd").parse(dato);
-            java.sql.Date _date = new java.sql.Date(date.getTime());
-            stmt.setDate(1, _date);
-            Date startTime = new SimpleDateFormat("hh:mm").parse(starttid);
-            java.sql.Time _time = new java.sql.Time(startTime.getTime());
-            Date endTime = new SimpleDateFormat("hh:mm").parse(starttid);
-            java.sql.Time _time1 = new java.sql.Time(startTime.getTime());
-            stmt.setTime(2, _time);
-            stmt.setTime(3, _time1);
-            int _form = Integer.parseInt(form);
-            stmt.setInt(4, _form);
-            int _prest = Integer.parseInt(prestasjon);
-            stmt.setInt(5, _prest);
-            stmt.setString(6, notat);
-            //ØktID returneres etter at "insert"-spørringen utføres.
-            id = stmt.executeUpdate();
-            ArrayList<Øvelse> øvelser = new ArrayList<>();
-            øvelser.addAll(a);
-            øvelser.addAll(k);
-            createØktØvelserRelasjon(id, a, k);
-            TreningsØkt t_økt = new TreningsØkt(id,_date, _time, _time1, _form, _prest, notat, øvelser);
-
+            PreparedStatement stmt = conn.prepareStatement("insert into apparatøvelse(Navn, Kilo, Sett, ApparatID) values ( ?, ?, ?, ?)", Statement.RETURN_GENERATED_KEYS );
+            stmt.setString(1,navn);
+            double _kilo = Double.parseDouble(kilo);
+            stmt.setDouble(2, _kilo);
+            int _sett = Integer.parseInt(sett);
+            stmt.setInt(3, _sett);
+            int _appID = Integer.parseInt(apparat);
+            stmt.setInt(4, _appID);
+            int id = stmt.executeUpdate();
+            ApparatØvelse a_ø = new ApparatØvelse(id, navn, _sett, _kilo,_appID);
             if (debug){
-                System.out.println(t_økt);
-                System.out.println("a:\t" + a + "\tk:\t" + k);
+                System.out.println(a_ø);
             }
             stmt.close();
             conn.close();
-            return  t_økt;
+            return  a_ø;
         } catch (Exception e ) {
             System.err.println( e.getClass().getName() + ": " + e.getMessage() );
             System.exit(0);
         }
-
         return null;
     }
 
-    public static void main(String[] args)  {
-        JDBCInsert jdbci = new JDBCInsert();
+
+    public KroppsØvelse createKroppsØvelse(String navn, String beskrivelse) {
+
         try{
-            ArrayList liste = jdbci.createApparat("navn","funksjon");
-            System.out.println(liste);
-        } catch(ClassNotFoundException e) {
+            Class.forName("com.mysql.cj.jdbc.Driver");
+            Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/treningsdagbok?useSSL=false", "root", "Fittehull2014");
+
+            PreparedStatement stmt = conn.prepareStatement("insert into kroppsøvelse(Navn, Beskrivelse) values ( ?, ?)", Statement.RETURN_GENERATED_KEYS );
+            stmt.setString(1,navn);
+            stmt.setString(2, beskrivelse);
+            int id = stmt.executeUpdate();
+            KroppsØvelse k_ø = new KroppsØvelse(id, navn, beskrivelse);
+            if (debug){
+                System.out.println(k_ø);
+            }
+            stmt.close();
+            conn.close();
+            return  k_ø;
+        } catch (Exception e ) {
             System.err.println( e.getClass().getName() + ": " + e.getMessage() );
             System.exit(0);
         }
+        return null;
+    }
+
+
+    public Apparat createApparat(String navn, String funksjon) {
+        try{
+            Class.forName("com.mysql.cj.jdbc.Driver");
+            Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/treningsdagbok?useSSL=false", "root", "Fittehull2014");
+
+            PreparedStatement stmt = conn.prepareStatement("insert into apparat(Navn, Funksjon) values ( ?, ?)", Statement.RETURN_GENERATED_KEYS );
+            stmt.setString(1,navn);
+            stmt.setString(2, funksjon);
+            int id = stmt.executeUpdate();
+            Apparat a = new Apparat(id, navn, funksjon);
+            if (debug){
+                System.out.println(a);
+            }
+            stmt.close();
+            conn.close();
+            return  a;
+        } catch (Exception e ) {
+            System.err.println( e.getClass().getName() + ": " + e.getMessage() );
+            System.exit(0);
+        }
+        return null;
+    }
+
+    public ØvelsesGruppe createGruppe(String navn) {
+        try{
+            Class.forName("com.mysql.cj.jdbc.Driver");
+            Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/treningsdagbok?useSSL=false", "root", "Fittehull2014");
+
+            PreparedStatement stmt = conn.prepareStatement("insert into øvelsesgruppe(Navn) values (?)", Statement.RETURN_GENERATED_KEYS );
+            stmt.setString(1,navn);
+            int id = stmt.executeUpdate();
+            ØvelsesGruppe øg = new ØvelsesGruppe(id, navn);
+            if (debug){
+                System.out.println(øg);
+            }
+            stmt.close();
+            conn.close();
+            return  øg;
+        } catch (Exception e ) {
+            System.err.println( e.getClass().getName() + ": " + e.getMessage() );
+            System.exit(0);
+        }
+        return null;
+    }
+
+
+    public static void main(String[] args)  {
+
     }
 }
 

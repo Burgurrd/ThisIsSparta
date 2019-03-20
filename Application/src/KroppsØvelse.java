@@ -4,9 +4,9 @@ public class KroppsØvelse extends Øvelse {
     private String navn, beskrivelse;
 
     public KroppsØvelse(int ID, String navn, String beskrivelse){
-        super(ID,false);
+        super(ID,false, navn);
         this.kroppsØvelseID = ID;
-        this.navn = navn;
+//        this.navn = navn;
         this.beskrivelse = beskrivelse;
 
     }

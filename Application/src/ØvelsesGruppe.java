@@ -1,7 +1,11 @@
+import java.util.ArrayList;
+
 public class ØvelsesGruppe {
 
     private int øvelsesgruppeID;
     private String navn;
+    private ArrayList<Øvelse> øvelser;
+
 
     public ØvelsesGruppe(int ID, String navn){
         this.øvelsesgruppeID = ID;
@@ -24,7 +28,17 @@ public class ØvelsesGruppe {
         this.navn = navn;
     }
 
+    public ArrayList<Øvelse> getØvelser() {
+        return øvelser;
+    }
 
+    public void setØvelser(ArrayList<Øvelse> øvelser) {
+        this.øvelser = øvelser;
+    }
+
+    public void addØvelser(Øvelse ø){
+        this.øvelser.add(ø);
+    }
 
 
 

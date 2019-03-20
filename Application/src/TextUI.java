@@ -1,105 +1,101 @@
+import java.lang.reflect.Array;
 import java.util.*;
 
-public class TextUI{
+public class TextUI {
 
     private DatabaseController DBC;
     private Scanner inp;
+    private ArrayList<TreningsØkt> _øktListe;
 
-    public void initUI(){
+    public void initUI() {
         DBC = new DatabaseController();
-        MineØkter_Main();
         inp = new Scanner(System.in);
+        MineØkter_Main();
     }
-//--------------------Meny--------------------
+
+    //--------------------Meny--------------------
     public void menyDirect() {//Her navigerer man mellom hovedmenyer for ulike tabs
         System.out.println("Naviger til: (Mine Økter/Ny Økt/Øvelser/Apparater/Øvelsesgrupper)");
         String cmd = inp.nextLine();
-        if(cmd.equals("Mine Økter")){
+        if (cmd.equals("Mine Økter")) {
             MineØkter_Main();
-        }
-        else if(cmd.equals("Ny Økt")){
+        } else if (cmd.equals("Ny Økt")) {
             NyØkt_Main();
-        }
-        else if(cmd.equals("Øvelser")){
+        } else if (cmd.equals("Øvelser")) {
             Øvelser_Main();
-        }
-        else if(cmd.equals("Apparater")){
+        } else if (cmd.equals("Apparater")) {
             Apparater_Main();
-        }
-        else if(cmd.equals("Øvelsesgrupper")){
+        } else if (cmd.equals("Øvelsesgrupper")) {
             Øvelsesgrupper_Main();
-        }
-        else{
+        } else {
             System.out.println("ERROR: Ugyldig kommando");
             menyDirect();
         }
     }
 
-    
-    
-// --------------------Mine Økter--------------------
+
+    // --------------------Mine Økter--------------------
     public void MineØkter_Main() {//Hovedmeny for denne taben. brukes til å navigere
         System.out.println("Jeg vil: (Meny/Sett Antall/Vis Økter)");
         String cmd = inp.nextLine();
-        if(cmd.equals("Meny")){
+        if (cmd.equals("Meny")) {
             menyDirect();
-        }
-        else if(cmd.equals("Sett Antall")){
+        } else if (cmd.equals("Sett Antall")) {
             MineØkter_SettAntall();
-        }
-        else if(cmd.equals("Vis Økter")){
+        } else if (cmd.equals("Vis Økter")) {
             MineØkter_VisØkter();
-        }
-        else{
+        } else {
             System.out.println("ERROR: Ugyldig kommando");
             MineØkter_Main();
         }
     }
+
     public void MineØkter_SettAntall() {//Setter antall økter som skal vises
         System.out.println("Velg antall økter til visning");
         String x = inp.nextLine();
-        if(x.equals("Tilbake")){
+        if (x.equals("Tilbake")) {
             MineØkter_Main();
         }
         int amount = Integer.parseInt(x);
         DBC.setAmount(amount);
         MineØkter_Main();
     }
+
     public void MineØkter_VisØkter() {//Viser et gitt antall økter med dato og navn
-        ArrayList<TreningsØkt> Økter = new ArrayList<>();
-        DBC.addØkterToList(Økter);
-        for(TreningsØkt elem : Økter){
+        this._øktListe = DBC.addØkterToList();
+        for (TreningsØkt elem : this._øktListe) {
             System.out.println("---------------------------------------------------------------------");
-            System.out.println(elem.dateString);
-            System.out.println(elem.nameString);
+            System.out.println(elem.getDato());//elem.dateString);
+            System.out.println(elem.getØktID());//elem.nameString);
         }
         System.out.println("");
         System.out.println("Jeg vil: (Vis Detaljer/Tilbake)");
         String cmd = inp.nextLine();
-        if(cmd.equals("Vis Detaljer")){
-            MineØkter_Detaljer(Økter);
-        }
-        else if(cmd.equals("Tilbake")){
+        if (cmd.equals("Vis Detaljer")) {
+            MineØkter_Detaljer();
+        } else if (cmd.equals("Tilbake")) {
             MineØkter_Main();
         }
     }
-    public void MineØkter_Detaljer(ArrayList<TreningsØkt> Økter) {//Gir detaljer om økt spesifisert med navn
-        System.out.println("Navn på økt: | ('Tilbake' for å gå tilbake)");
+
+    public void MineØkter_Detaljer() {//Gir detaljer om økt spesifisert med navn
+        System.out.println("ID på økt: | ('Tilbake' for å gå tilbake)");
         String cmd = inp.nextLine();
-        if(cmd.equals("Tilbake")){
+        if (cmd.equals("Tilbake")) {
             MineØkter_Main();
         }
-        for(TreningsØkt elem : Økter){
-            if(cmd.equals(elem.nameString)){
-                System.out.println(elem.dateString);
-                System.out.println(elem.nameString);
-                System.out.println(elem.øvelserString);
-                System.out.println(elem.resultatString);
+        for (TreningsØkt elem : this._øktListe) {
+            if (cmd.equals(elem.getØktID())) {//elem.nameString)){
+                System.out.println(elem.getDato());//elem.dateString);
+                System.out.println(elem.getØvelser());//elem.øvelserString);
+                System.out.println(elem.getNotat());//elem.resultatString);
                 System.out.println("");
             }
         }
-        MineØkter_Detaljer(Økter);
+        MineØkter_Detaljer();
     }
+
+
 //--------------------Ny Økt--------------------
     public void NyØkt_Main() {//Hovedmeny for denne taben. brukes til å navigere
         System.out.println("Jeg vil: (Meny/Registrer Økt)");
@@ -144,15 +140,23 @@ public class TextUI{
         System.out.println("Legg til øvelse: (Navn på øvelse, 'Ferdig' avslutter valget)");
         cmd = inp.nextLine();
         while(!cmd.equals("Ferdig")){
-            for(Øvelse ø : DBC.registrerteØvelser){
-                if(cmd.equals(ø.name)){
+            for(Øvelse ø : DBC._registrerteKroppsØvelser){
+                if(cmd.equals(ø.getNavn())){
                     ValgteØvelser.add(ø);
                 }
                 else{
                     cnt += 1;
                 }
             }
-            if(cnt==DBC.registrerteØvelser.length()){
+            for(Øvelse ø : DBC._registrerteApparatØvelser){
+                if(cmd.equals(ø.getNavn())){
+                    ValgteØvelser.add(ø);
+                }
+                else{
+                    cnt += 1;
+                }
+            }
+            if(cnt== (DBC._registrerteApparatØvelser.size()+DBC._registrerteKroppsØvelser.size())){
                 System.out.println("Øvelse ikke funnet, ble ikke lagt til");
             }
             System.out.println("Legg til øvelse: (Navn på øvelse, 'Ferdig' avslutter valget)");
@@ -215,9 +219,9 @@ public class TextUI{
             øvelse += ",";
             while(idiot==true){
                 System.out.println("Apparat: ");
-                String x = inp.nextLine();
-                for(Apparat a : DBC.registrerteApparater){
-                    if(x.equals(a.name)){
+                String x = inp.nextLine().toString();
+                for(Apparat a : DBC._registrerteApparater){
+                    if(x.toString().equalsIgnoreCase(a.getNavn().toString())){
                         øvelse += x;
                         idiot = false;
                     }
@@ -225,7 +229,7 @@ public class TextUI{
                         cnt += 1;
                     }
                 }
-                if(cnt == DBC.registrerteApparater.length()){
+                if(cnt == DBC._registrerteApparater.size()){
                     System.out.println("ERROR: Dette apparatet finnes ikke");
                 }
             }
@@ -262,36 +266,36 @@ public class TextUI{
     }
 
     private void Apparater_VisApparater() {//Viser alle apparater med navn
-        ArrayList<Apparat> Apparater = new ArrayList<>();
-        DBC.addApparaterToList(Apparater);
-        for(Apparat elem : Apparater){
+//        ArrayList<Apparat> Apparater = new ArrayList<>();
+//        DBC.addApparaterToList();
+        for(Apparat elem : DBC._registrerteApparater){
             System.out.println("---------------------------------------------------------------------");
-            System.out.println(elem.nameString);
+            System.out.println(elem.getNavn());
         }
         System.out.println("");
         System.out.println("Jeg vil: (Vis Detaljer/Tilbake)");
         String cmd = inp.nextLine();
         if(cmd.equals("Vis Detaljer")){
-            Apparater_Detaljer(Apparater);
+            Apparater_Detaljer();
         }
         else if(cmd.equals("Tilbake")){
             Apparater_Main();
         }
     }
-    public void Apparater_Detaljer(ArrayList<Apparat> Apparater) {//Gir detaljer om apparat spesifisert med navn
+    public void Apparater_Detaljer() {//Gir detaljer om apparat spesifisert med navn
         System.out.println("Navn på apparat: | ('Tilbake' for å gå tilbake)");
         String cmd = inp.nextLine();
         if(cmd.equals("Tilbake")){
             Apparater_Main();
         }
-        for(Apparat elem : Apparater){
-            if(cmd.equals(elem.nameString)){
-                System.out.println(elem.nameString);
-                System.out.println(elem.functionString);
+        for(Apparat elem : DBC._registrerteApparater){
+            if(cmd.equals(elem.getNavn())){
+                System.out.println(elem.getNavn());
+                System.out.println(elem.getFunksjon());
                 System.out.println("");
             }
         }
-        Apparater_Detaljer(Apparater);
+        Apparater_Detaljer();
     }
 
     private void Apparater_RegistrerApparat() {//Registrerer et nytt apparat
@@ -330,37 +334,37 @@ public class TextUI{
     }
 
     public void Øvelsesgrupper_VisGrupper(){//Viser alle grupper med navn
-        ArrayList<ØvelsesGruppe> grupper = new ArrayList<>();
-        DBC.addGrupperToList(grupper);
-        for(ØvelsesGruppe elem : grupper){
+//        ArrayList<ØvelsesGruppe> grupper = new ArrayList<>();
+//        DBC.addGrupperToList(grupper);
+        for(ØvelsesGruppe elem : DBC._registrerteGrupper){
             System.out.println("---------------------------------------------------------------------");
-            System.out.println(elem.nameString);
+            System.out.println(elem.getNavn());
         }
         System.out.println("");
         System.out.println("Jeg vil: (Vis Detaljer/Tilbake)");
         String cmd = inp.nextLine();
         if(cmd.equals("Vis Detaljer")){
-            Øvelsesgrupper_Detaljer(grupper);
+            Øvelsesgrupper_Detaljer();
         }
         else if(cmd.equals("Tilbake")){
             Øvelsesgrupper_Main();
         }
     }
 
-    public void Øvelsesgrupper_Detaljer(ArrayList<ØvelsesGruppe> grupper) {//Gir detaljer om gruppe spesifisert med navn
+    public void Øvelsesgrupper_Detaljer() {//Gir detaljer om gruppe spesifisert med navn
         System.out.println("Navn på gruppe: | ('Tilbake' for å gå tilbake)");
         String cmd = inp.nextLine();
         if(cmd.equals("Tilbake")){
             Øvelsesgrupper_Main();
         }
-        for(ØvelsesGruppe elem : grupper){
-            if(cmd.equals(elem.nameString)){
-                System.out.println(elem.nameString);
-                System.out.println(elem.øvelserString);
+        for(ØvelsesGruppe elem : DBC._registrerteGrupper){
+            if(cmd.equals(elem.getNavn())){
+                System.out.println(elem.getNavn());
+                System.out.println(elem.getØvelser());
                 System.out.println("");
             }
         }
-        Øvelsesgrupper_Detaljer(grupper);
+        Øvelsesgrupper_Detaljer();
     }
 
     public void Øvelsesgrupper_RegistrerGruppe(){//Registrerer en ny gruppe
@@ -376,37 +380,46 @@ public class TextUI{
     }
 
     public void Øvelsesgrupper_LeggTilØvelse(){//Legger til øvelse til en gitt øvelsesgruppe
-        ØvelsesGruppe activeGroup;
+        ØvelsesGruppe activeGroup = null;
         int cnt = 0;
         System.out.println("Velg en øvelsesgruppe: (Navn på øvelsesgruppe) | ('Tilbake' for å gå tilbake)");
         String cmd = inp.nextLine();
         if(cmd.equals("Tilbake")){
             Øvelsesgrupper_Main();
         }
-        for(ØvelsesGruppe øg : DBC.registrerteØvelsesgrupper){
-            if(cmd.equals(øg.name)){
+        for(ØvelsesGruppe øg : DBC._registrerteGrupper){
+            if(cmd.equals(øg.getNavn())){
                 activeGroup = øg;
             }
             else{
                 cnt += 1;
             }
         }
-        if(cnt == DBC.registrerteØvelsesgrupper.length()){
+        if(cnt == DBC._registrerteGrupper.size()){
             System.out.println("ERROR: Øvelsesgruppe finnes ikke");
             Øvelsesgrupper_LeggTilØvelse();
         }
         System.out.println("Legg til øvelse: (Navn på øvelse, 'Ferdig' avslutter valget)");
-        String cmd = inp.nextLine();
+        cmd = inp.nextLine();
         while(!cmd.equals("Ferdig")){
-            for(Øvelse ø : DBC.registrerteØvelser){
-                if(cmd.equals(ø.name)){
-                    activeGroup.add(ø);
+            for(Øvelse ø : DBC._registrerteKroppsØvelser){
+
+                if(cmd.equals(ø.getNavn())){
+                    activeGroup.addØvelser(ø);
                 }
                 else{
                     cnt += 1;
                 }
             }
-            if(cnt==DBC.registrerteØvelser.length()){
+            for(Øvelse ø : DBC._registrerteApparatØvelser){
+                if(cmd.equals(ø.getNavn())){
+                    activeGroup.addØvelser(ø);
+                }
+                else{
+                    cnt += 1;
+                }
+            }
+            if(cnt==(DBC._registrerteKroppsØvelser.size()+DBC._registrerteApparatØvelser.size())){
                 System.out.println("ERROR: Øvelse ikke funnet, ble ikke lagt til");
             }
             System.out.println("Legg til øvelse: (Navn på øvelse, 'Ferdig' avslutter valget)");

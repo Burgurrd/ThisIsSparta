@@ -4,7 +4,17 @@ import java.util.Date;
 
 public class DatabaseController{
 
+    public int _antallØkter;
+    public ArrayList<Øvelse> _registrerteKroppsØvelser = new ArrayList<Øvelse>();
+    public ArrayList<Øvelse> _registrerteApparatØvelser = new ArrayList<Øvelse>();
+    public ArrayList<Apparat> _registrerteApparater = new ArrayList<Apparat>();
+    public ArrayList<ØvelsesGruppe> _registrerteGrupper = new ArrayList<ØvelsesGruppe>();
 
+    public DatabaseController(){
+        //update all Lists
+
+
+    }
     // hver av disse metodene skal parse strengen og opprette objekter av tilsvarende type, samt legge dem inn i databasen.
     public TreningsØkt registrerØkt(String s, ArrayList<Øvelse> ø){
         JDBCInsert iC = new JDBCInsert();
@@ -28,44 +38,68 @@ public class DatabaseController{
         return t_ø;
     }
 
-    public void registrerØvelse(String s) {
+    public Øvelse registrerØvelse(String s) {
         String[] parts = s.split(",");
 
         if (parts.length == 2){
-            registrerKroppsØvelse(s);
+            return registrerKroppsØvelse(s);
         }
         else{
-            registrerApparatØvelse(s);
+            return registrerApparatØvelse(s);
         }
+
     }
 
-    public void registrerApparatØvelse(String s) {
+    public ApparatØvelse registrerApparatØvelse(String s) {
+        JDBCInsert iC = new JDBCInsert();
         String[] parts = s.split(",");
         String navn = parts[0];
         String kilo = parts[1];
         String sett = parts[2];
         String apparat = parts[3];
-
+        ApparatØvelse ø = iC.createApparatØvelse(navn,kilo,sett,apparat);
+        this._registrerteApparatØvelser.add(ø);
+        return ø;
     }
 
-    public void registrerKroppsØvelse(String s) {
+    public KroppsØvelse registrerKroppsØvelse(String s) {
+        JDBCInsert iC = new JDBCInsert();
         String[] parts = s.split(",");
         String navn = parts[0];
         String beskrivelse = parts[1];
+        KroppsØvelse ø = iC.createKroppsØvelse(navn,beskrivelse);
+        this._registrerteKroppsØvelser.add(ø);
+        return ø;
     }
 
-    public void registrerApparat(String s) {
+    public Apparat registrerApparat(String s) {
+        JDBCInsert iC = new JDBCInsert();
         String[] parts = s.split(",");
         String navn = parts[0];
         String funkjson = parts[1];
-
+        Apparat a = iC.createApparat(navn,funkjson);
+        this._registrerteApparater.add(a);
+        return a;
     }
 
-    public void registrerGruppe(String s){
+    public ØvelsesGruppe registrerGruppe(String s){
+        JDBCInsert iC = new JDBCInsert();
         String navn = s;
-        ØvelsesGruppe t_gruppe = new ØvelsesGruppe(id, navn);
+        ØvelsesGruppe ø = iC.createGruppe(navn);
+        this._registrerteGrupper.add(ø);
+        return ø;
+    }
 
-        return t_gruppe;
+    public void setAmount(int i){
+        this._antallØkter = i;
+    }
+
+    public ArrayList<TreningsØkt> addØkterToList(){
+
+
+
+        ArrayList<TreningsØkt> ø = new ArrayList<TreningsØkt>();
+        return ø;
     }
 
 

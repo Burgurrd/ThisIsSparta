@@ -4,9 +4,9 @@ public class ApparatØvelse extends Øvelse {
     private String navn;
 
     public ApparatØvelse(int ID, String navn, int sett, double kilo, int apparatID){
-        super(ID,true);
+        super(ID,true, navn);
         this.apparatØvelseID = ID;
-        this.navn = navn;
+//        this.navn = navn;
         this.sett = sett;
         this.kilo = kilo;
         this.apparatID = apparatID;
