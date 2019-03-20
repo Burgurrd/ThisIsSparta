@@ -8,9 +8,9 @@ import java.util.Map;
 
 public class JDBCSelect{
     public static boolean debug = true;
-    public String url = "jdbc:mysql://localhost:3306/treningsdagbok?useSSL=false";
+    public String url = "jdbc:mysql://localhost:3306/treningsdagbok?useSSL=false&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC";
     public String u = "root";
-    public String pw = "Fittehull2014";
+    public String pw = "passord";
 
     public ArrayList<Apparat> getApparatListe() {
         ArrayList<Apparat> ApparatListe = new ArrayList<Apparat>();
@@ -109,6 +109,39 @@ public class JDBCSelect{
             System.exit(0);
         }
         return ØktListe;
+    }
+
+    public ArrayList<ØvelsesGruppe> getGrupperListe() {
+        ArrayList<ØvelsesGruppe> GruppeListe = new ArrayList<ØvelsesGruppe>();
+//        DriverManager.registerDriver(new java.sql.Driver());
+//        Class.forName("java.sql.Driver");
+        try{
+            Class.forName("com.mysql.cj.jdbc.Driver");
+            Connection conn = DriverManager.getConnection(url, u, pw);
+
+//            PreparedStatement stmt = conn.prepareStatement("select * from apparat");
+            PreparedStatement stmt = conn.prepareStatement("select * from øvelsesgruppe");
+//            stmt.setInt(1, Integer.parseInt(s[0]));
+            ResultSet rs = stmt.executeQuery();
+            while ( rs.next() ) {
+                int gruppeID = rs.getInt("ØvelsesGruppeID");
+                String navn = rs.getString("Navn");
+                ØvelsesGruppe a = new ØvelsesGruppe(gruppeID, navn);
+                GruppeListe.add(a);
+//                ApparatListe.add(row);
+                if (debug){
+                    System.out.println("ØvelsesGruppeID: " + gruppeID + "\tNavn: " + navn);
+                }
+            }
+            rs.close();
+            stmt.close();
+            conn.close();
+        } catch ( Exception e ) {
+            e.printStackTrace();
+            System.err.println( e.getClass().getName() + ": " + e.getMessage() );
+            System.exit(0);
+        }
+        return GruppeListe;
     }
 
 }

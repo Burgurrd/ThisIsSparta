@@ -140,7 +140,7 @@ public class TextUI {
         System.out.println("Prestasjon: (1-10)");
         økt += inp.nextLine();
         økt += ",";
-        System.out.println("Resultat: ");
+        System.out.println("Resultat: (Skriftlig oppsummering)");
         økt += inp.nextLine();
         System.out.println("Legg til øvelse: (Navn på øvelse, 'Ferdig' avslutter valget)");
         cmd = inp.nextLine();

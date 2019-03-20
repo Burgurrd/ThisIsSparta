@@ -23,6 +23,7 @@ public class DatabaseController{
         Collections.sort(_registrerteØkter, øktC);
         this._antallØkter = this._registrerteØkter.size();
         this._registrerteApparater.addAll(sC.getApparatListe());
+        this._registrerteGrupper.addAll(sC.getGrupperListe());
 
         //update all Lists
 
