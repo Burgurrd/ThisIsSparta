@@ -9,13 +9,13 @@ public class DatabaseController{
     public ArrayList<Øvelse> _registrerteApparatØvelser = new ArrayList<Øvelse>();
     public ArrayList<Apparat> _registrerteApparater = new ArrayList<Apparat>();
     public ArrayList<ØvelsesGruppe> _registrerteGrupper = new ArrayList<ØvelsesGruppe>();
+    public ArrayList<TreningsØkt> _registrerteØkter = new ArrayList<TreningsØkt>();
     public JDBCInsert iC;
     public JDBCSelect sC;
     public DatabaseController(){
         this.iC = new JDBCInsert();
         this.sC = new JDBCSelect();
-        øl = sC.getØktListe()
-
+        this._registrerteØkter.addAll(sC.getØktListe());
         //update all Lists
 
 
@@ -94,14 +94,6 @@ public class DatabaseController{
 
     public void setAmount(int i){
         this._antallØkter = i;
-    }
-
-    public ArrayList<TreningsØkt> addØkterToList(){
-
-
-
-        ArrayList<TreningsØkt> ø = new ArrayList<TreningsØkt>();
-        return ø;
     }
 
 

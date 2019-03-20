@@ -33,6 +33,7 @@ public class JDBCInsert {
                 stmt.close();
                 conn.close();
             } catch (Exception e) {
+                e.printStackTrace();
                 System.err.println(e.getClass().getName() + ": " + e.getMessage());
                 System.exit(0);
             }
@@ -51,6 +52,7 @@ public class JDBCInsert {
                 stmt.close();
                 conn.close();
             } catch (Exception e) {
+                e.printStackTrace();
                 System.err.println(e.getClass().getName() + ": " + e.getMessage());
                 System.exit(0);
             }
@@ -93,6 +95,7 @@ public class JDBCInsert {
             conn.close();
             return  t_økt;
         } catch ( Exception e ) {
+            e.printStackTrace();
             System.err.println( e.getClass().getName() + ": " + e.getMessage() );
             System.exit(0);
         }
@@ -123,6 +126,7 @@ public class JDBCInsert {
             conn.close();
             return  a_ø;
         } catch (Exception e ) {
+            e.printStackTrace();
             System.err.println( e.getClass().getName() + ": " + e.getMessage() );
             System.exit(0);
         }
@@ -148,6 +152,7 @@ public class JDBCInsert {
             conn.close();
             return  k_ø;
         } catch (Exception e ) {
+            e.printStackTrace();
             System.err.println( e.getClass().getName() + ": " + e.getMessage() );
             System.exit(0);
         }
@@ -172,6 +177,7 @@ public class JDBCInsert {
             conn.close();
             return  a;
         } catch (Exception e ) {
+            e.printStackTrace();
             System.err.println( e.getClass().getName() + ": " + e.getMessage() );
             System.exit(0);
         }
@@ -194,6 +200,7 @@ public class JDBCInsert {
             conn.close();
             return  øg;
         } catch (Exception e ) {
+            e.printStackTrace();
             System.err.println( e.getClass().getName() + ": " + e.getMessage() );
             System.exit(0);
         }
