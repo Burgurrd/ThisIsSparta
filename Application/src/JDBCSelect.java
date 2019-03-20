@@ -48,7 +48,7 @@ public class JDBCSelect{
     }
 
     public ArrayList getØktListe() throws java.lang.ClassNotFoundException{
-        ArrayList<ArrayList<String>> ØktListe = new ArrayList<ArrayList<String>>();
+        ArrayList<TreningsØkt> ØktListe = new ArrayList<>();
         try{
             Class.forName("com.mysql.cj.jdbc.Driver");
             Connection conn = DriverManager.getConnection(url, u, pw);
@@ -75,28 +75,41 @@ public class JDBCSelect{
                 int form = rs.getInt("Form");
                 int prestasjon = rs.getInt("Prestasjon");
                 String notat = rs.getString("Notat");
+                ArrayList<Øvelse> øvelser = new ArrayList<>();
                 PreparedStatement stmt1 = conn.prepareStatement("select * from apparatøvelseiøkt where ØktID = ? ");
                 ResultSet rs1 = stmt1.executeQuery();
                 while (rs1.next()){
-                    int aøID = rs.getInt("ApparatØvelseID");
-                    String navn = rs.getString("Navn");
-                    Double kilo = rs.getDouble("Kilo");
-                    int sett = rs.getInt("Sett");
-
-
+                    int aøID = rs1.getInt("ApparatØvelseID");
+                    String navn = rs1.getString("Navn");
+                    Double kilo = rs1.getDouble("Kilo");
+                    int sett = rs1.getInt("Sett");
+                    int apparatID = rs1.getInt("ApparatID");
+                    ApparatØvelse a = new ApparatØvelse(aøID, navn, sett, kilo, apparatID);
+                    øvelser.add(a);
                 }
-                TreningsØkt ø = new TreningsØkt(øktID, dato, tid,varighet,form,prestasjon)
-                ArrayList row = new ArrayList();
-                row.add(øktID);
-                row.add(dato);
-                row.add(tid);
-                row.add(varighet);
-                row.add(form);
-                row.add(prestasjon);
-                row.add(notat);
-                ØktListe.add(row);
+                rs1.close();
+                PreparedStatement stmt2 = conn.prepareStatement("select * from kroppsøvelseiøkt where ØktID = ? ");
+                rs1 = stmt2.executeQuery();
+                while (rs1.next()){
+                    int aøID = rs1.getInt("KroppsØvelseID");
+                    String navn = rs1.getString("Navn");
+                    String beskrivelse = rs1.getString("Beskrivelse");
+                    KroppsØvelse a = new KroppsØvelse(aøID, navn, beskrivelse);
+                    øvelser.add(a);
+                }
+                rs1.close();
+                TreningsØkt ø = new TreningsØkt(øktID, dato, tid, varighet, form, prestasjon, notat, øvelser);
+//                ArrayList row = new ArrayList();
+//                row.add(øktID);
+//                row.add(dato);
+//                row.add(tid);
+//                row.add(varighet);
+//                row.add(form);
+//                row.add(prestasjon);
+//                row.add(notat);
+                ØktListe.add(ø);
                 if (debug){
-                    System.out.println(row);
+                    System.out.println(ø);
                 }
             }
             rs.close();
