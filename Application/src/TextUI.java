@@ -234,6 +234,7 @@ public class TextUI {
                         øvelse += a.getApparatID();
 
                         idiot = false;
+                        break;
                     }
                     else{
                         cnt += 1;
