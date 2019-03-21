@@ -8,9 +8,9 @@ import java.util.Map;
 
 public class JDBCSelect{
     public static boolean debug = true;
-    public String url = "jdbc:mysql://localhost:3306/treningsdagbok?useSSL=false";
-    public String u = "root";
-    public String pw = "Fittehull2014";
+    public String url = "jdbc:mysql://mysql.stud.ntnu.no:3306/fs_tdt4145_1_gruppe300?useSSL=false";
+    public String u = "sigurdra_root";
+    public String pw = "root";
 
     public ArrayList<Apparat> getApparatListe() {
         ArrayList<Apparat> ApparatListe = new ArrayList<Apparat>();
@@ -21,7 +21,7 @@ public class JDBCSelect{
             Connection conn = DriverManager.getConnection(url, u, pw);
 
 //            PreparedStatement stmt = conn.prepareStatement("select * from apparat");
-            PreparedStatement stmt = conn.prepareStatement("select * from apparat");
+            PreparedStatement stmt = conn.prepareStatement("select * from Apparat");
 //            stmt.setInt(1, Integer.parseInt(s[0]));
             ResultSet rs = stmt.executeQuery();
             while ( rs.next() ) {
@@ -62,7 +62,7 @@ public class JDBCSelect{
                 int prestasjon = rs.getInt("Prestasjon");
                 String notat = rs.getString("Notat");
                 ArrayList<Øvelse> øvelser = new ArrayList<>();
-                PreparedStatement stmt1 = conn.prepareStatement("select * from apparatøvelseiøkt where ØktID = (?)");
+                PreparedStatement stmt1 = conn.prepareStatement("select * from ApparatØvelseIØkt where ØktID = (?)");
                 stmt1.setInt(1,øktID);
                 ResultSet rs1 = stmt1.executeQuery();
                 while (rs1.next()){
@@ -75,7 +75,7 @@ public class JDBCSelect{
                     øvelser.add(a);
                 }
                 rs1.close();
-                PreparedStatement stmt2 = conn.prepareStatement("select * from kroppsøvelseiøkt where ØktID = (?)");
+                PreparedStatement stmt2 = conn.prepareStatement("select * from KroppsØvelseIØkt where ØktID = (?)");
                 stmt2.setInt(1,øktID);
                 ResultSet rs2 = stmt2.executeQuery();
                 while (rs2.next()){
