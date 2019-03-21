@@ -52,14 +52,14 @@ public class TextUI {
     }
 
     public void MineØkter_SettAntall() {//Setter antall økter som skal vises
-        System.out.println("Velg antall økter til visning");
+        System.out.println("Velg antall okter til visning");
         String x = inp.nextLine();
         if (x.equalsIgnoreCase("Tilbake")) {
             MineØkter_Main();
         }
         int amount = Integer.parseInt(x);
         if (!(DBC.setAmount(amount))){
-            System.out.println("ERROR: Det er bare " + DBC._antallØkter + " antall økter registrert.");
+            System.out.println("ERROR: Det er bare " + DBC._antallØkter + " antall okter registrert.");
             MineØkter_SettAntall();
         }
         else {
@@ -85,7 +85,7 @@ public class TextUI {
     }
 
     public void MineØkter_Detaljer() {//Gir detaljer om økt spesifisert med navn
-        System.out.println("ID på økt: | ('Tilbake' for å gå tilbake)");
+        System.out.println("ID på okt: | ('Tilbake' for å gå tilbake)");
         String cmd = inp.nextLine();
         if (cmd.equalsIgnoreCase("Tilbake")) {
             MineØkter_Main();
@@ -146,7 +146,7 @@ public class TextUI {
         økt += ",";
         System.out.println("Resultat: (Skriftlig oppsummering)");
         økt += inp.nextLine();
-        System.out.println("Legg til øvelse: (Navn på øvelse, 'Ferdig' avslutter valget)");
+        System.out.println("Legg til ovelse: (Navn på ovelse, 'Ferdig' avslutter valget)");
         cmd = inp.nextLine();
         while(!cmd.equalsIgnoreCase("Ferdig")){
             for(Øvelse ø : DBC._registrerteKroppsØvelser){
@@ -170,7 +170,7 @@ public class TextUI {
             if(cnt == (DBC._registrerteApparatØvelser.size()+DBC._registrerteKroppsØvelser.size())){
                 System.out.println("Øvelse ikke funnet, ble ikke lagt til");
             }
-            System.out.println("Legg til øvelse: (Navn på øvelse, 'Ferdig' avslutter valget)");
+            System.out.println("Legg til ovelse: (Navn på ovelse, 'Ferdig' avslutter valget)");
             cmd = inp.nextLine();
         }
         DBC.registrerØkt(økt, ValgteØvelser);
@@ -218,7 +218,7 @@ public class TextUI {
         øvelse += cmd;
         øvelse += ",";
         while(idiot == true){
-            System.out.println("Apparatøvelse? (Ja/Nei)");
+            System.out.println("Apparatovelse? (Ja/Nei)");
             String x = inp.nextLine();
             if(x.equalsIgnoreCase("Ja")){
                 apparatøvelse = true;
@@ -272,7 +272,7 @@ public class TextUI {
             System.out.println("ERROR: Dette skal ikke kunne skje, hackerman...");
             menyDirect();
         }
-        DBC.registrerØvelse(øvelse); 
+        DBC.registrerØvelse(øvelse);
         Øvelser_Main();
     }
 
@@ -340,13 +340,13 @@ public class TextUI {
         System.out.println("Funksjon: ");
         apparat += inp.nextLine();
         apparat += ",";
-        DBC.registrerApparat(apparat); 
+        DBC.registrerApparat(apparat);
         Apparater_Main();
     }
 
 // --------------------Øvelsesgrupper--------------------
     public void Øvelsesgrupper_Main(){//Hovedmeny for denne taben. brukes til å navigere
-        System.out.println("Jeg vil: (Meny/Vis Øvelsesgrupper/Lag Ny Gruppe/Legg til øvelse i gruppe)");
+        System.out.println("Jeg vil: (Meny/Vis Øvelsesgrupper/Lag Ny Gruppe/Legg til ovelse i gruppe)");
         String cmd = inp.nextLine();
         if(cmd.equalsIgnoreCase("Meny")){
             menyDirect();
@@ -357,7 +357,7 @@ public class TextUI {
         else if(cmd.equalsIgnoreCase("Lag Ny Gruppe")){
             Øvelsesgrupper_RegistrerGruppe();
         }
-        else if(cmd.equalsIgnoreCase("Legg til øvelse i gruppe")){
+        else if(cmd.equalsIgnoreCase("Legg til ovelse i gruppe")){
             Øvelsesgrupper_LeggTilØvelse();
         }
         else{
@@ -410,14 +410,14 @@ public class TextUI {
             Øvelsesgrupper_Main();
         }
         gruppe += cmd;
-        DBC.registrerGruppe(gruppe); 
+        DBC.registrerGruppe(gruppe);
         Øvelsesgrupper_Main();
     }
 
     public void Øvelsesgrupper_LeggTilØvelse(){//Legger til øvelse til en gitt øvelsesgruppe
         ØvelsesGruppe activeGroup = null;
         int cnt = 0;
-        System.out.println("Velg en øvelsesgruppe: (Navn på øvelsesgruppe) | ('Tilbake' for å gå tilbake)");
+        System.out.println("Velg en ovelsesgruppe: (Navn på ovelsesgruppe) | ('Tilbake' for å gå tilbake)");
         String cmd = inp.nextLine();
         if(cmd.equalsIgnoreCase("Tilbake")){
             Øvelsesgrupper_Main();
@@ -434,7 +434,7 @@ public class TextUI {
             System.out.println("ERROR: Øvelsesgruppe finnes ikke");
             Øvelsesgrupper_LeggTilØvelse();
         }
-        System.out.println("Legg til øvelse: (Navn på øvelse, 'Ferdig' avslutter valget)");
+        System.out.println("Legg til ovelse: (Navn på ovelse, 'Ferdig' avslutter valget)");
         cmd = inp.nextLine();
         while(!cmd.equalsIgnoreCase("Ferdig")){
             for(Øvelse ø : DBC._registrerteKroppsØvelser){
@@ -459,7 +459,7 @@ public class TextUI {
             if(cnt==(DBC._registrerteKroppsØvelser.size()+DBC._registrerteApparatØvelser.size())){
                 System.out.println("ERROR: Øvelse ikke funnet, ble ikke lagt til");
             }
-            System.out.println("Legg til øvelse: (Navn på øvelse, 'Ferdig' avslutter valget)");
+            System.out.println("Legg til ovelse: (Navn på ovelse, 'Ferdig' avslutter valget)");
             cmd = inp.nextLine();
         }
         Øvelsesgrupper_Main();
