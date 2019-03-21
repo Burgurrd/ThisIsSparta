@@ -37,7 +37,7 @@ public class TextUI {
 
     // --------------------Mine Økter--------------------
     public void MineØkter_Main() {//Hovedmeny for denne taben. brukes til å navigere
-        System.out.println("Jeg vil: \nMeny | Sett Antall | Vis okter");
+        System.out.println("Jeg vil: \nMeny | Sett Antall ("+ DBC._antallØkter + ") | Vis okter");
         String cmd = inp.nextLine();
         if (cmd.equalsIgnoreCase("Meny")) {
             menyDirect();
@@ -89,6 +89,19 @@ public class TextUI {
         String cmd = inp.nextLine();
         if (cmd.equalsIgnoreCase("Tilbake")) {
             MineØkter_Main();
+        }
+        try{
+        ArrayList<Integer> oktIDs = new ArrayList<>();
+        for (TreningsØkt ø : DBC._registrerteØkter){
+            oktIDs.add(ø.getØktID());
+        }
+        if(!(oktIDs.contains(Integer.parseInt(cmd)))){
+            System.out.println("ERROR: Ugyldig ID");
+            MineØkter_Detaljer();
+        }}
+        catch (Exception e){
+            System.out.println("ERROR: Ugyldig ID");
+            MineØkter_Detaljer();
         }
         for (TreningsØkt elem : DBC._registrerteØkter) {
             if (Integer.parseInt(cmd) == (elem.getØktID())) {//elem.nameString)){
