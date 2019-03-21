@@ -341,6 +341,14 @@ public class TextUI {
         if(cmd.equalsIgnoreCase("Tilbake")){
             Apparater_Main();
         }
+        ArrayList<String> appnavns = new ArrayList<>();
+        for (Apparat a : DBC._registrerteApparater){
+            appnavns.add(a.getNavn());
+        }
+        if(!(appnavns.contains(cmd))){
+            System.out.println("ERROR: Ugyldig Navn");
+            Apparater_Detaljer();
+        }
         for(Apparat elem : DBC._registrerteApparater){
             if(cmd.equals(elem.getNavn())){
                 System.out.println(elem.getNavn());
@@ -405,6 +413,11 @@ public class TextUI {
         else if(cmd.equalsIgnoreCase("Tilbake")){
             Øvelsesgrupper_Main();
         }
+        else{
+            System.out.println("ERROR: Ugyldig kommando");
+            Øvelsesgrupper_VisGrupper();
+
+        }
     }
 
     public void Øvelsesgrupper_Detaljer() {//Gir detaljer om gruppe spesifisert med navn
@@ -412,6 +425,14 @@ public class TextUI {
         String cmd = inp.nextLine();
         if(cmd.equalsIgnoreCase("Tilbake")){
             Øvelsesgrupper_Main();
+        }
+        ArrayList<String> ognavns = new ArrayList<>();
+        for (ØvelsesGruppe og : DBC._registrerteGrupper){
+            ognavns.add(og.getNavn());
+        }
+        if(!(ognavns.contains(cmd))){
+            System.out.println("ERROR: Ugyldig Navn");
+            Øvelsesgrupper_Detaljer();
         }
         for(ØvelsesGruppe elem : DBC._registrerteGrupper){
             if(cmd.equals(elem.getNavn())){
@@ -460,13 +481,19 @@ public class TextUI {
             System.out.println("ERROR: ovelsesgruppe finnes ikke");
             Øvelsesgrupper_LeggTilØvelse();
         }
+        for (Øvelse ø : DBC._registrerteApparatØvelser){
+            System.out.println("Øvelsesnavn:\t" + ø.getNavn());
+        }
+        for (Øvelse ø : DBC._registrerteKroppsØvelser){
+            System.out.println("Øvelsesnavn:\t" + ø.getNavn());
+        }
         System.out.println("Legg til ovelse: \nNavn på ovelse, 'Ferdig' avslutter valget");
         cmd = inp.nextLine();
         while(!cmd.equalsIgnoreCase("Ferdig")){
             for(Øvelse ø : DBC._registrerteKroppsØvelser){
 
                 if(cmd.equals(ø.getNavn())){
-                    activeGroup.addØvelser(ø);
+                    DBC.registrerØvelseIGruppe(activeGroup, ø);
                     break;
                 }
                 else{
@@ -475,7 +502,7 @@ public class TextUI {
             }
             for(Øvelse ø : DBC._registrerteApparatØvelser){
                 if(cmd.equals(ø.getNavn())){
-                    activeGroup.addØvelser(ø);
+                    DBC.registrerØvelseIGruppe(activeGroup, ø);
                     break;
                 }
                 else{
