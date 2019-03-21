@@ -146,6 +146,12 @@ public class TextUI {
         økt += ",";
         System.out.println("Resultat: \nSkriftlig oppsummering");
         økt += inp.nextLine();
+        for (Øvelse a :DBC._registrerteApparatØvelser){
+            System.out.println("Apparatovelse:\t" + a.getNavn());
+        }
+        for (Øvelse a :DBC._registrerteKroppsØvelser){
+            System.out.println("Kroppsovelse:\t" + a.getNavn());
+        }
         System.out.println("Legg til ovelse: \nNavn på ovelse, 'Ferdig' avslutter valget");
         cmd = inp.nextLine();
         while(!cmd.equalsIgnoreCase("Ferdig")){
@@ -170,6 +176,7 @@ public class TextUI {
             if(cnt == (DBC._registrerteApparatØvelser.size()+DBC._registrerteKroppsØvelser.size())){
                 System.out.println("ovelse ikke funnet, ble ikke lagt til");
             }
+
             System.out.println("Legg til ovelse: \nNavn på ovelse, 'Ferdig' avslutter valget");
             cmd = inp.nextLine();
         }
@@ -242,7 +249,10 @@ public class TextUI {
             øvelse += inp.nextLine();
             øvelse += ",";
             while(idiot==true){
-                System.out.println("Apparat: ");
+                for (Apparat a :DBC._registrerteApparater){
+                System.out.println("ApparatID\t" + a.getApparatID() + "\tApparatnavn:\t" + a.getNavn());
+                }
+                System.out.println("Velg Apparat: ");
                 String x = inp.nextLine().toString();
 //                System.out.println("x:\t" + x);
 //                System.out.println("x.getclass:\t" + x.getClass());
@@ -417,6 +427,9 @@ public class TextUI {
     public void Øvelsesgrupper_LeggTilØvelse(){//Legger til øvelse til en gitt øvelsesgruppe
         ØvelsesGruppe activeGroup = null;
         int cnt = 0;
+        for (ØvelsesGruppe g :DBC._registrerteGrupper){
+            System.out.println("Gruppenavn:\t" + g.getNavn());
+        }
         System.out.println("Velg en ovelsesgruppe: \nNavn på ovelsesgruppe | 'Tilbake' for å gå tilbake");
         String cmd = inp.nextLine();
         if(cmd.equalsIgnoreCase("Tilbake")){
