@@ -111,4 +111,37 @@ public class JDBCSelect{
         return ØktListe;
     }
 
+    public ArrayList<ØvelsesGruppe> getGrupperListe() {
+        ArrayList<ØvelsesGruppe> GruppeListe = new ArrayList<ØvelsesGruppe>();
+//        DriverManager.registerDriver(new java.sql.Driver());
+//        Class.forName("java.sql.Driver");
+        try{
+            Class.forName("com.mysql.cj.jdbc.Driver");
+            Connection conn = DriverManager.getConnection(url, u, pw);
+
+//            PreparedStatement stmt = conn.prepareStatement("select * from apparat");
+            PreparedStatement stmt = conn.prepareStatement("select * from øvelsesgruppe");
+//            stmt.setInt(1, Integer.parseInt(s[0]));
+            ResultSet rs = stmt.executeQuery();
+            while ( rs.next() ) {
+                int gruppeID = rs.getInt("ØvelsesGruppeID");
+                String navn = rs.getString("Navn");
+                ØvelsesGruppe a = new ØvelsesGruppe(gruppeID, navn);
+                GruppeListe.add(a);
+//                ApparatListe.add(row);
+                if (debug){
+                    System.out.println("ØvelsesGruppeID: " + gruppeID + "\tNavn: " + navn);
+                }
+            }
+            rs.close();
+            stmt.close();
+            conn.close();
+        } catch ( Exception e ) {
+            e.printStackTrace();
+            System.err.println( e.getClass().getName() + ": " + e.getMessage() );
+            System.exit(0);
+        }
+        return GruppeListe;
+    }
+
 }

@@ -17,15 +17,15 @@ public class TextUI {
     public void menyDirect() {//Her navigerer man mellom hovedmenyer for ulike tabs
         System.out.println("Naviger til: (Mine Økter/Ny Økt/Øvelser/Apparater/Øvelsesgrupper)");
         String cmd = inp.nextLine();
-        if (cmd.equals("Mine Økter")) {
+        if (cmd.equalsIgnoreCase("Mine Økter")) {
             MineØkter_Main();
-        } else if (cmd.equals("Ny Økt")) {
+        } else if (cmd.equalsIgnoreCase("Ny Økt")) {
             NyØkt_Main();
-        } else if (cmd.equals("Øvelser")) {
+        } else if (cmd.equalsIgnoreCase("Øvelser")) {
             Øvelser_Main();
-        } else if (cmd.equals("Apparater")) {
+        } else if (cmd.equalsIgnoreCase("Apparater")) {
             Apparater_Main();
-        } else if (cmd.equals("Øvelsesgrupper")) {
+        } else if (cmd.equalsIgnoreCase("Øvelsesgrupper")) {
             Øvelsesgrupper_Main();
         } else {
             System.out.println("ERROR: Ugyldig kommando");
@@ -38,11 +38,11 @@ public class TextUI {
     public void MineØkter_Main() {//Hovedmeny for denne taben. brukes til å navigere
         System.out.println("Jeg vil: (Meny/Sett Antall/Vis Økter)");
         String cmd = inp.nextLine();
-        if (cmd.equals("Meny")) {
+        if (cmd.equalsIgnoreCase("Meny")) {
             menyDirect();
-        } else if (cmd.equals("Sett Antall")) {
+        } else if (cmd.equalsIgnoreCase("Sett Antall")) {
             MineØkter_SettAntall();
-        } else if (cmd.equals("Vis Økter")) {
+        } else if (cmd.equalsIgnoreCase("Vis Økter")) {
             MineØkter_VisØkter();
         } else {
             System.out.println("ERROR: Ugyldig kommando");
@@ -53,7 +53,7 @@ public class TextUI {
     public void MineØkter_SettAntall() {//Setter antall økter som skal vises
         System.out.println("Velg antall økter til visning");
         String x = inp.nextLine();
-        if (x.equals("Tilbake")) {
+        if (x.equalsIgnoreCase("Tilbake")) {
             MineØkter_Main();
         }
         int amount = Integer.parseInt(x);
@@ -76,9 +76,9 @@ public class TextUI {
         System.out.println("");
         System.out.println("Jeg vil: (Vis Detaljer/Tilbake)");
         String cmd = inp.nextLine();
-        if (cmd.equals("Vis Detaljer")) {
+        if (cmd.equalsIgnoreCase("Vis Detaljer")) {
             MineØkter_Detaljer();
-        } else if (cmd.equals("Tilbake")) {
+        } else if (cmd.equalsIgnoreCase("Tilbake")) {
             MineØkter_Main();
         }
     }
@@ -86,7 +86,7 @@ public class TextUI {
     public void MineØkter_Detaljer() {//Gir detaljer om økt spesifisert med navn
         System.out.println("ID på økt: | ('Tilbake' for å gå tilbake)");
         String cmd = inp.nextLine();
-        if (cmd.equals("Tilbake")) {
+        if (cmd.equalsIgnoreCase("Tilbake")) {
             MineØkter_Main();
         }
         for (TreningsØkt elem : this._øktListe) {
@@ -105,10 +105,10 @@ public class TextUI {
     public void NyØkt_Main() {//Hovedmeny for denne taben. brukes til å navigere
         System.out.println("Jeg vil: (Meny/Registrer Økt)");
         String cmd = inp.nextLine();
-        if(cmd.equals("Meny")){
+        if(cmd.equalsIgnoreCase("Meny")){
             menyDirect();
         }
-        else if(cmd.equals("Registrer Økt")){
+        else if(cmd.equalsIgnoreCase("Registrer Økt")){
             NyØkt_RegistrerØkt();
         }
         else{
@@ -123,7 +123,7 @@ public class TextUI {
         int cnt = 0;
         System.out.println("Dato: (dd.mm.åå) | ('Tilbake' for å gå tilbake)");
         String cmd = inp.nextLine();
-        if(cmd.equals("Tilbake")){
+        if(cmd.equalsIgnoreCase("Tilbake")){
             NyØkt_Main();
         }
         økt += cmd;
@@ -140,11 +140,11 @@ public class TextUI {
         System.out.println("Prestasjon: (1-10)");
         økt += inp.nextLine();
         økt += ",";
-        System.out.println("Resultat: ");
+        System.out.println("Resultat: (Skriftlig oppsummering)");
         økt += inp.nextLine();
         System.out.println("Legg til øvelse: (Navn på øvelse, 'Ferdig' avslutter valget)");
         cmd = inp.nextLine();
-        while(!cmd.equals("Ferdig")){
+        while(!cmd.equalsIgnoreCase("Ferdig")){
             for(Øvelse ø : DBC._registrerteKroppsØvelser){
                 if(cmd.equals(ø.getNavn())){
                     ValgteØvelser.add(ø);
@@ -175,10 +175,10 @@ public class TextUI {
     public void Øvelser_Main(){//Hovedmeny for denne taben. brukes til å navigere
         System.out.println("Jeg vil: (Meny/Registrer Øvelse)");
         String cmd = inp.nextLine();
-        if(cmd.equals("Meny")){
+        if(cmd.equalsIgnoreCase("Meny")){
             menyDirect();
         }
-        else if(cmd.equals("Registrer Øvelse")){
+        else if(cmd.equalsIgnoreCase("Registrer Øvelse")){
             Øvelser_RegistrerØvelse();
         }
         else{
@@ -193,7 +193,7 @@ public class TextUI {
         Boolean idiot = true;
         System.out.println("Navn: | ('Tilbake' for å gå tilbake)");
         String cmd = inp.nextLine();
-        if(cmd.equals("Tilbake")){
+        if(cmd.equalsIgnoreCase("Tilbake")){
             Øvelser_Main();
         }
         øvelse += cmd;
@@ -201,11 +201,11 @@ public class TextUI {
         while(idiot == true){
             System.out.println("Apparatøvelse? (Ja/Nei)");
             String x = inp.nextLine();
-            if(x.equals("Ja")){
+            if(x.equalsIgnoreCase("Ja")){
                 apparatøvelse = true;
                 idiot = false;
             }
-            else if(x.equals("Nei")){
+            else if(x.equalsIgnoreCase("Nei")){
                 apparatøvelse = false;
                 idiot = false;
             }
@@ -261,13 +261,13 @@ public class TextUI {
     public void Apparater_Main(){//Hovedmeny for denne taben. brukes til å navigere
         System.out.println("Jeg vil: (Meny/Vis Apparater/Registrer Apparat)");
         String cmd = inp.nextLine();
-        if(cmd.equals("Meny")){
+        if(cmd.equalsIgnoreCase("Meny")){
             menyDirect();
         }
-        else if(cmd.equals("Vis Apparater")){
+        else if(cmd.equalsIgnoreCase("Vis Apparater")){
             Apparater_VisApparater();
         }
-        else if(cmd.equals("Registrer Apparat")){
+        else if(cmd.equalsIgnoreCase("Registrer Apparat")){
             Apparater_RegistrerApparat();
         }
         else{
@@ -286,17 +286,17 @@ public class TextUI {
         System.out.println("");
         System.out.println("Jeg vil: (Vis Detaljer/Tilbake)");
         String cmd = inp.nextLine();
-        if(cmd.equals("Vis Detaljer")){
+        if(cmd.equalsIgnoreCase("Vis Detaljer")){
             Apparater_Detaljer();
         }
-        else if(cmd.equals("Tilbake")){
+        else if(cmd.equalsIgnoreCase("Tilbake")){
             Apparater_Main();
         }
     }
     public void Apparater_Detaljer() {//Gir detaljer om apparat spesifisert med navn
         System.out.println("Navn på apparat: | ('Tilbake' for å gå tilbake)");
         String cmd = inp.nextLine();
-        if(cmd.equals("Tilbake")){
+        if(cmd.equalsIgnoreCase("Tilbake")){
             Apparater_Main();
         }
         for(Apparat elem : DBC._registrerteApparater){
@@ -313,7 +313,7 @@ public class TextUI {
         String apparat = "";
         System.out.println("Navn: | ('Tilbake' for å gå tilbake)");
         String cmd = inp.nextLine();
-        if(cmd.equals("Tilbake")){
+        if(cmd.equalsIgnoreCase("Tilbake")){
             Apparater_Main();
         }
         apparat += cmd;
@@ -329,13 +329,13 @@ public class TextUI {
     public void Øvelsesgrupper_Main(){//Hovedmeny for denne taben. brukes til å navigere
         System.out.println("Jeg vil: (Meny/Vis Øvelsesgrupper/Lag Ny Gruppe)");
         String cmd = inp.nextLine();
-        if(cmd.equals("Meny")){
+        if(cmd.equalsIgnoreCase("Meny")){
             menyDirect();
         }
-        else if(cmd.equals("Vis Øvelsesgrupper")){
+        else if(cmd.equalsIgnoreCase("Vis Øvelsesgrupper")){
             Øvelsesgrupper_VisGrupper();
         }
-        else if(cmd.equals("Lag Ny Gruppe")){
+        else if(cmd.equalsIgnoreCase("Lag Ny Gruppe")){
             Øvelsesgrupper_RegistrerGruppe();
         }
         else{
@@ -354,10 +354,10 @@ public class TextUI {
         System.out.println("");
         System.out.println("Jeg vil: (Vis Detaljer/Tilbake)");
         String cmd = inp.nextLine();
-        if(cmd.equals("Vis Detaljer")){
+        if(cmd.equalsIgnoreCase("Vis Detaljer")){
             Øvelsesgrupper_Detaljer();
         }
-        else if(cmd.equals("Tilbake")){
+        else if(cmd.equalsIgnoreCase("Tilbake")){
             Øvelsesgrupper_Main();
         }
     }
@@ -365,7 +365,7 @@ public class TextUI {
     public void Øvelsesgrupper_Detaljer() {//Gir detaljer om gruppe spesifisert med navn
         System.out.println("Navn på gruppe: | ('Tilbake' for å gå tilbake)");
         String cmd = inp.nextLine();
-        if(cmd.equals("Tilbake")){
+        if(cmd.equalsIgnoreCase("Tilbake")){
             Øvelsesgrupper_Main();
         }
         for(ØvelsesGruppe elem : DBC._registrerteGrupper){
@@ -382,7 +382,7 @@ public class TextUI {
         String gruppe = "";
         System.out.println("Navn: | ('Tilbake' for å gå tilbake)");
         String cmd = inp.nextLine();
-        if(cmd.equals("Tilbake")){
+        if(cmd.equalsIgnoreCase("Tilbake")){
             Øvelsesgrupper_Main();
         }
         gruppe += cmd;
@@ -395,7 +395,7 @@ public class TextUI {
         int cnt = 0;
         System.out.println("Velg en øvelsesgruppe: (Navn på øvelsesgruppe) | ('Tilbake' for å gå tilbake)");
         String cmd = inp.nextLine();
-        if(cmd.equals("Tilbake")){
+        if(cmd.equalsIgnoreCase("Tilbake")){
             Øvelsesgrupper_Main();
         }
         for(ØvelsesGruppe øg : DBC._registrerteGrupper){
@@ -412,7 +412,7 @@ public class TextUI {
         }
         System.out.println("Legg til øvelse: (Navn på øvelse, 'Ferdig' avslutter valget)");
         cmd = inp.nextLine();
-        while(!cmd.equals("Ferdig")){
+        while(!cmd.equalsIgnoreCase("Ferdig")){
             for(Øvelse ø : DBC._registrerteKroppsØvelser){
 
                 if(cmd.equals(ø.getNavn())){
