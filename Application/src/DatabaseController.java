@@ -26,8 +26,6 @@ public class DatabaseController{
         this._registrerteGrupper.addAll(sC.getGrupperListe());
         this._registrerteApparatØvelser.addAll(sC.getApparatØvelser());
         this._registrerteKroppsØvelser.addAll(sC.getKroppsØvelser());
-        System.out.println(this._registrerteApparatØvelser);
-        System.out.println(this._registrerteKroppsØvelser);
 
         //update all Lists
 
@@ -57,7 +55,7 @@ public class DatabaseController{
     }
 
     public Øvelse registrerØvelse(String s) {
-        System.out.println("registrerer øvelse med streng:\n" + s);
+//        System.out.println("registrerer øvelse med streng:\n" + s);
         String[] parts = s.split(",");
 
         if (parts.length == 2){

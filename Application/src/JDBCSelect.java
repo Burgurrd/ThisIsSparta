@@ -8,7 +8,7 @@ import java.util.Map;
 
 
 public class JDBCSelect{
-    public static boolean debug = true;
+    public static boolean debug = false;
     public String url = "jdbc:mysql://mysql.stud.ntnu.no:3306/fs_tdt4145_1_gruppe300?useSSL=false";
     public String u = "sigurdra_root";
     public String pw = "root";
