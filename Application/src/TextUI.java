@@ -94,7 +94,7 @@ public class TextUI {
             if (Integer.parseInt(cmd) == (elem.getØktID())) {//elem.nameString)){
                 System.out.println("Dato\t" + elem.getDato());//elem.dateString);
                 for (Øvelse ø : elem.getØvelser()){
-                    System.out.println("ovelsesnavn:\t" + ø.getNavn()+ "\tovelsesID\t" + ø.getID());
+                    System.out.println("Ovelsestype:\t" + ø.getType() + "ovelse" + "\tOvelsesnavn:\t" + ø.getNavn());
                 }
 //                System.out.println(elem.getØvelser());//elem.øvelserString);
                 System.out.println("Notat:\t" + elem.getNotat());//elem.resultatString);
@@ -198,10 +198,10 @@ public class TextUI {
 
     private void Øvelser_VisØvelser(){ //Viser Øvelser
         for (Øvelse ø : DBC._registrerteApparatØvelser){
-            System.out.println("ovelsesID:\t" + ø.getID() + "\tovelsesnavn:\t" + ø.getNavn());
+            System.out.println("Ovelsestype:\t" + ø.getType() + "ovelse" + "\tOvelsesnavn:\t" + ø.getNavn());
         }
         for (Øvelse ø : DBC._registrerteKroppsØvelser){
-            System.out.println("ovelsesID:\t" + ø.getID() + "\tovelsesnavn:\t" + ø.getNavn());
+            System.out.println("Ovelsestype:\t" + ø.getType() + "ovelse" + "\tOvelsesnavn:\t" + ø.getNavn());
         }
         Øvelser_Main();
 

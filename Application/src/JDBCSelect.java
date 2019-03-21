@@ -86,9 +86,8 @@ public class JDBCSelect{
                     Double kilo = rs2.getDouble("Kilo");
                     int sett = rs2.getInt("Sett");
                     int apparatID = rs2.getInt("ApparatID");
+                    ApparatØvelse a = new ApparatØvelse(aID, navn, sett, kilo, apparatID);
                     if (dbc._registrerteApparatØvelser.isEmpty()){
-                        ApparatØvelse a = new ApparatØvelse(aID, navn, sett, kilo, apparatID);
-                        øvelser.add(a);
                         this.dbc._registrerteApparatØvelser.add(a);
                     }
                     int cnt = 0;
@@ -97,11 +96,10 @@ public class JDBCSelect{
                             cnt += 1;
                         }
                         if (cnt == dbc._registrerteApparatØvelser.size()){
-                            ApparatØvelse a = new ApparatØvelse(aID, navn, sett, kilo, apparatID);
-                            øvelser.add(a);
                             this.dbc._registrerteApparatØvelser.add(a);
                         }
                     }
+                    øvelser.add(a);
 
                 }
             rs2.close();
@@ -121,9 +119,8 @@ public class JDBCSelect{
                     int kID = rs5.getInt("KroppsØvelseID");
                     String navn = rs5.getString("Navn");
                     String beskrivelse = rs5.getString("Beskrivelse");
+                    KroppsØvelse a = new KroppsØvelse(kID, navn, beskrivelse);
                     if (dbc._registrerteKroppsØvelser.isEmpty()){
-                        KroppsØvelse a = new KroppsØvelse(kID, navn, beskrivelse);
-                        øvelser.add(a);
                         this.dbc._registrerteKroppsØvelser.add(a);
                     }
                     int cnt = 0;
@@ -132,11 +129,11 @@ public class JDBCSelect{
                             cnt += 1;
                         }
                         if (cnt == dbc._registrerteKroppsØvelser.size()){
-                            KroppsØvelse a = new KroppsØvelse(kID, navn, beskrivelse);
-                            øvelser.add(a);
                             this.dbc._registrerteKroppsØvelser.add(a);
                         }
                     }
+                    øvelser.add(a);
+
 //
                 }
                 rs5.close();

@@ -15,6 +15,14 @@ public class Øvelse {
     public String getNavn() {
         return this.navn;
     }
+    public String getType(){
+        if (this.isApparatØvelse){
+            return "apparat";
+        }
+        else{
+            return "kropps";
+        }
+    }
 
     public void setNavn(String navn) {
         this.navn = navn;
