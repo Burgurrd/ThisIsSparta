@@ -112,6 +112,7 @@ public class TextUI {
 //                System.out.println(elem.getØvelser());//elem.øvelserString);
                 System.out.println("Notat:\t" + elem.getNotat());//elem.resultatString);
                 System.out.println("");
+                break;
             }
         }
         MineØkter_Detaljer();

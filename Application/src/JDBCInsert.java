@@ -86,7 +86,12 @@ public class JDBCInsert {
             stmt.setInt(5, _prest);
             stmt.setString(6, notat);
             //ØktID returneres etter at "insert"-spørringen utføres.
-            int id = stmt.executeUpdate();
+            stmt.executeUpdate();
+            PreparedStatement ps = conn.prepareStatement("select LAST_INSERT_ID()");
+            ResultSet rs = ps.executeQuery();
+            rs.next();
+            int id = rs.getInt("LAST_INSERT_ID()");
+            System.out.println("ØktID fra databasen:\t" + id);
             ArrayList<Øvelse> øvelser = new ArrayList<>();
             øvelser.addAll(a);
             øvelser.addAll(k);
@@ -97,6 +102,7 @@ public class JDBCInsert {
                 System.out.println(t_økt);
                 System.out.println("a:\t" + a + "\tk:\t" + k);
             }
+            ps.close();
             stmt.close();
             conn.close();
             return t_økt;
