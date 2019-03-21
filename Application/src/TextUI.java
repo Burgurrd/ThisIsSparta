@@ -11,22 +11,22 @@ public class TextUI {
     public void initUI() {
         DBC = new DatabaseController();
         inp = new Scanner(System.in);
-        MineØkter_Main();
+        menyDirect();
     }
 
     //--------------------Meny--------------------
     public void menyDirect() {//Her navigerer man mellom hovedmenyer for ulike tabs
-        System.out.println("Naviger til: (Mine Økter/Ny Økt/Øvelser/Apparater/Øvelsesgrupper)");
+        System.out.println("\nNaviger til: \nMine okter | Ny okt | ovelser | Apparater | ovelsesgrupper");
         String cmd = inp.nextLine();
-        if (cmd.equalsIgnoreCase("Mine Økter")) {
+        if (cmd.equalsIgnoreCase("Mine okter")) {
             MineØkter_Main();
-        } else if (cmd.equalsIgnoreCase("Ny Økt")) {
+        } else if (cmd.equalsIgnoreCase("Ny okt")) {
             NyØkt_Main();
-        } else if (cmd.equalsIgnoreCase("Øvelser")) {
+        } else if (cmd.equalsIgnoreCase("ovelser")) {
             Øvelser_Main();
         } else if (cmd.equalsIgnoreCase("Apparater")) {
             Apparater_Main();
-        } else if (cmd.equalsIgnoreCase("Øvelsesgrupper")) {
+        } else if (cmd.equalsIgnoreCase("ovelsesgrupper")) {
             Øvelsesgrupper_Main();
         } else {
             System.out.println("ERROR: Ugyldig kommando");
@@ -37,13 +37,13 @@ public class TextUI {
 
     // --------------------Mine Økter--------------------
     public void MineØkter_Main() {//Hovedmeny for denne taben. brukes til å navigere
-        System.out.println("Jeg vil: (Meny/Sett Antall/Vis Økter)");
+        System.out.println("Jeg vil: \nMeny | Sett Antall | Vis okter");
         String cmd = inp.nextLine();
         if (cmd.equalsIgnoreCase("Meny")) {
             menyDirect();
         } else if (cmd.equalsIgnoreCase("Sett Antall")) {
             MineØkter_SettAntall();
-        } else if (cmd.equalsIgnoreCase("Vis Økter")) {
+        } else if (cmd.equalsIgnoreCase("Vis okter")) {
             MineØkter_VisØkter();
         } else {
             System.out.println("ERROR: Ugyldig kommando");
@@ -75,7 +75,7 @@ public class TextUI {
             System.out.println(elem.getØktID());//elem.nameString);
         }
         System.out.println("");
-        System.out.println("Jeg vil: (Vis Detaljer/Tilbake)");
+        System.out.println("Jeg vil: \nVis Detaljer | Tilbake");
         String cmd = inp.nextLine();
         if (cmd.equalsIgnoreCase("Vis Detaljer")) {
             MineØkter_Detaljer();
@@ -85,7 +85,7 @@ public class TextUI {
     }
 
     public void MineØkter_Detaljer() {//Gir detaljer om økt spesifisert med navn
-        System.out.println("ID på okt: | ('Tilbake' for å gå tilbake)");
+        System.out.println("ID på okt: | \n'Tilbake' for å gå tilbake");
         String cmd = inp.nextLine();
         if (cmd.equalsIgnoreCase("Tilbake")) {
             MineØkter_Main();
@@ -94,7 +94,7 @@ public class TextUI {
             if (Integer.parseInt(cmd) == (elem.getØktID())) {//elem.nameString)){
                 System.out.println("Dato\t" + elem.getDato());//elem.dateString);
                 for (Øvelse ø : elem.getØvelser()){
-                    System.out.println("Øvelsesnavn:\t" + ø.getNavn()+ "\tØvelsesID\t" + ø.getID());
+                    System.out.println("ovelsesnavn:\t" + ø.getNavn()+ "\tovelsesID\t" + ø.getID());
                 }
 //                System.out.println(elem.getØvelser());//elem.øvelserString);
                 System.out.println("Notat:\t" + elem.getNotat());//elem.resultatString);
@@ -107,12 +107,12 @@ public class TextUI {
 
 //--------------------Ny Økt--------------------
     public void NyØkt_Main() {//Hovedmeny for denne taben. brukes til å navigere
-        System.out.println("Jeg vil: (Meny/Registrer Økt)");
+        System.out.println("Jeg vil: \nMeny | Registrer okt");
         String cmd = inp.nextLine();
         if(cmd.equalsIgnoreCase("Meny")){
             menyDirect();
         }
-        else if(cmd.equalsIgnoreCase("Registrer Økt")){
+        else if(cmd.equalsIgnoreCase("Registrer okt")){
             NyØkt_RegistrerØkt();
         }
         else{
@@ -125,28 +125,28 @@ public class TextUI {
         ArrayList<Øvelse> ValgteØvelser = new ArrayList<>();
         String økt = "";
         int cnt = 0;
-        System.out.println("Dato: (dd.mm.åå) | ('Tilbake' for å gå tilbake)");
+        System.out.println("Dato: \ndd.mm.åå | 'Tilbake' for å gå tilbake");
         String cmd = inp.nextLine();
         if(cmd.equalsIgnoreCase("Tilbake")){
             NyØkt_Main();
         }
         økt += cmd;
         økt += ",";
-        System.out.println("Starttid: (hh.mm)");
+        System.out.println("Starttid: \nhh.mm");
         økt += inp.nextLine();
         økt += ",";
-        System.out.println("Sluttid: (hh.mm)");
+        System.out.println("Sluttid: \nhh.mm");
         økt += inp.nextLine();
         økt += ",";
-        System.out.println("Dagsform: (1-10)");
+        System.out.println("Dagsform: \n1-10");
         økt += inp.nextLine();
         økt += ",";
-        System.out.println("Prestasjon: (1-10)");
+        System.out.println("Prestasjon: \n1-10");
         økt += inp.nextLine();
         økt += ",";
-        System.out.println("Resultat: (Skriftlig oppsummering)");
+        System.out.println("Resultat: \nSkriftlig oppsummering");
         økt += inp.nextLine();
-        System.out.println("Legg til ovelse: (Navn på ovelse, 'Ferdig' avslutter valget)");
+        System.out.println("Legg til ovelse: \nNavn på ovelse, 'Ferdig' avslutter valget");
         cmd = inp.nextLine();
         while(!cmd.equalsIgnoreCase("Ferdig")){
             for(Øvelse ø : DBC._registrerteKroppsØvelser){
@@ -168,9 +168,9 @@ public class TextUI {
                 }
             }
             if(cnt == (DBC._registrerteApparatØvelser.size()+DBC._registrerteKroppsØvelser.size())){
-                System.out.println("Øvelse ikke funnet, ble ikke lagt til");
+                System.out.println("ovelse ikke funnet, ble ikke lagt til");
             }
-            System.out.println("Legg til ovelse: (Navn på ovelse, 'Ferdig' avslutter valget)");
+            System.out.println("Legg til ovelse: \nNavn på ovelse, 'Ferdig' avslutter valget");
             cmd = inp.nextLine();
         }
         DBC.registrerØkt(økt, ValgteØvelser);
@@ -179,15 +179,15 @@ public class TextUI {
 
 // --------------------Øvelser--------------------
     public void Øvelser_Main(){//Hovedmeny for denne taben. brukes til å navigere
-        System.out.println("Jeg vil: (Meny/Vis Øvelser/Registrer Øvelse)");
+        System.out.println("Jeg vil: \nMeny | Vis ovelser | Registrer ovelse");
         String cmd = inp.nextLine();
         if(cmd.equalsIgnoreCase("Meny")){
             menyDirect();
         }
-        else if(cmd.equalsIgnoreCase("Vis Øvelser")){
+        else if(cmd.equalsIgnoreCase("Vis ovelser")){
             Øvelser_VisØvelser();
         }
-        else if(cmd.equalsIgnoreCase("Registrer Øvelse")){
+        else if(cmd.equalsIgnoreCase("Registrer ovelse")){
             Øvelser_RegistrerØvelse();
         }
         else{
@@ -198,10 +198,10 @@ public class TextUI {
 
     private void Øvelser_VisØvelser(){ //Viser Øvelser
         for (Øvelse ø : DBC._registrerteApparatØvelser){
-            System.out.println("ØvelsesID:\t" + ø.getID() + "\tØvelsesnavn:\t" + ø.getNavn());
+            System.out.println("ovelsesID:\t" + ø.getID() + "\tovelsesnavn:\t" + ø.getNavn());
         }
         for (Øvelse ø : DBC._registrerteKroppsØvelser){
-            System.out.println("ØvelsesID:\t" + ø.getID() + "\tØvelsesnavn:\t" + ø.getNavn());
+            System.out.println("ovelsesID:\t" + ø.getID() + "\tovelsesnavn:\t" + ø.getNavn());
         }
         Øvelser_Main();
 
@@ -210,7 +210,7 @@ public class TextUI {
         String øvelse = "";
         Boolean apparatøvelse = null;
         Boolean idiot = true;
-        System.out.println("Navn: | ('Tilbake' for å gå tilbake)");
+        System.out.println("Navn: | 'Tilbake' for å gå tilbake");
         String cmd = inp.nextLine();
         if(cmd.equalsIgnoreCase("Tilbake")){
             Øvelser_Main();
@@ -218,7 +218,7 @@ public class TextUI {
         øvelse += cmd;
         øvelse += ",";
         while(idiot == true){
-            System.out.println("Apparatovelse? (Ja/Nei)");
+            System.out.println("Apparatovelse? \nJa | Nei");
             String x = inp.nextLine();
             if(x.equalsIgnoreCase("Ja")){
                 apparatøvelse = true;
@@ -278,7 +278,7 @@ public class TextUI {
 
 // --------------------Apparater--------------------
     public void Apparater_Main(){//Hovedmeny for denne taben. brukes til å navigere
-        System.out.println("Jeg vil: (Meny/Vis Apparater/Registrer Apparat)");
+        System.out.println("Jeg vil: \nMeny | Vis Apparater | Registrer Apparat");
         String cmd = inp.nextLine();
         if(cmd.equalsIgnoreCase("Meny")){
             menyDirect();
@@ -303,7 +303,7 @@ public class TextUI {
             System.out.println(elem.getNavn());
         }
         System.out.println("");
-        System.out.println("Jeg vil: (Vis Detaljer/Tilbake)");
+        System.out.println("Jeg vil: \nVis Detaljer | Tilbake");
         String cmd = inp.nextLine();
         if(cmd.equalsIgnoreCase("Vis Detaljer")){
             Apparater_Detaljer();
@@ -313,7 +313,7 @@ public class TextUI {
         }
     }
     public void Apparater_Detaljer() {//Gir detaljer om apparat spesifisert med navn
-        System.out.println("Navn på apparat: | ('Tilbake' for å gå tilbake)");
+        System.out.println("Navn på apparat: | 'Tilbake' for å gå tilbake");
         String cmd = inp.nextLine();
         if(cmd.equalsIgnoreCase("Tilbake")){
             Apparater_Main();
@@ -330,7 +330,7 @@ public class TextUI {
 
     private void Apparater_RegistrerApparat() {//Registrerer et nytt apparat
         String apparat = "";
-        System.out.println("Navn: | ('Tilbake' for å gå tilbake)");
+        System.out.println("Navn: | 'Tilbake' for å gå tilbake");
         String cmd = inp.nextLine();
         if(cmd.equalsIgnoreCase("Tilbake")){
             Apparater_Main();
@@ -346,12 +346,12 @@ public class TextUI {
 
 // --------------------Øvelsesgrupper--------------------
     public void Øvelsesgrupper_Main(){//Hovedmeny for denne taben. brukes til å navigere
-        System.out.println("Jeg vil: (Meny/Vis Øvelsesgrupper/Lag Ny Gruppe/Legg til ovelse i gruppe)");
+        System.out.println("Jeg vil: \nMeny | Vis ovelsesgrupper | Lag Ny Gruppe | Legg til ovelse i gruppe");
         String cmd = inp.nextLine();
         if(cmd.equalsIgnoreCase("Meny")){
             menyDirect();
         }
-        else if(cmd.equalsIgnoreCase("Vis Øvelsesgrupper")){
+        else if(cmd.equalsIgnoreCase("Vis ovelsesgrupper")){
             Øvelsesgrupper_VisGrupper();
         }
         else if(cmd.equalsIgnoreCase("Lag Ny Gruppe")){
@@ -374,7 +374,7 @@ public class TextUI {
             System.out.println(elem.getNavn());
         }
         System.out.println("");
-        System.out.println("Jeg vil: (Vis Detaljer/Tilbake)");
+        System.out.println("Jeg vil: \nVis Detaljer | Tilbake");
         String cmd = inp.nextLine();
         if(cmd.equalsIgnoreCase("Vis Detaljer")){
             Øvelsesgrupper_Detaljer();
@@ -385,7 +385,7 @@ public class TextUI {
     }
 
     public void Øvelsesgrupper_Detaljer() {//Gir detaljer om gruppe spesifisert med navn
-        System.out.println("Navn på gruppe: | ('Tilbake' for å gå tilbake)");
+        System.out.println("Navn på gruppe: | 'Tilbake' for å gå tilbake");
         String cmd = inp.nextLine();
         if(cmd.equalsIgnoreCase("Tilbake")){
             Øvelsesgrupper_Main();
@@ -394,7 +394,7 @@ public class TextUI {
             if(cmd.equals(elem.getNavn())){
                 System.out.println(elem.getNavn());
                 for (Øvelse ø : elem.getØvelser()){
-                    System.out.println("Øvelse:\t" + ø.getNavn());
+                    System.out.println("ovelse:\t" + ø.getNavn());
                 }
                 System.out.println("");
             }
@@ -404,7 +404,7 @@ public class TextUI {
 
     public void Øvelsesgrupper_RegistrerGruppe(){//Registrerer en ny gruppe
         String gruppe = "";
-        System.out.println("Navn: | ('Tilbake' for å gå tilbake)");
+        System.out.println("Navn: | 'Tilbake' for å gå tilbake");
         String cmd = inp.nextLine();
         if(cmd.equalsIgnoreCase("Tilbake")){
             Øvelsesgrupper_Main();
@@ -417,7 +417,7 @@ public class TextUI {
     public void Øvelsesgrupper_LeggTilØvelse(){//Legger til øvelse til en gitt øvelsesgruppe
         ØvelsesGruppe activeGroup = null;
         int cnt = 0;
-        System.out.println("Velg en ovelsesgruppe: (Navn på ovelsesgruppe) | ('Tilbake' for å gå tilbake)");
+        System.out.println("Velg en ovelsesgruppe: \nNavn på ovelsesgruppe | 'Tilbake' for å gå tilbake");
         String cmd = inp.nextLine();
         if(cmd.equalsIgnoreCase("Tilbake")){
             Øvelsesgrupper_Main();
@@ -431,10 +431,10 @@ public class TextUI {
             }
         }
         if(cnt == DBC._registrerteGrupper.size()){
-            System.out.println("ERROR: Øvelsesgruppe finnes ikke");
+            System.out.println("ERROR: ovelsesgruppe finnes ikke");
             Øvelsesgrupper_LeggTilØvelse();
         }
-        System.out.println("Legg til ovelse: (Navn på ovelse, 'Ferdig' avslutter valget)");
+        System.out.println("Legg til ovelse: \nNavn på ovelse, 'Ferdig' avslutter valget");
         cmd = inp.nextLine();
         while(!cmd.equalsIgnoreCase("Ferdig")){
             for(Øvelse ø : DBC._registrerteKroppsØvelser){
@@ -457,9 +457,9 @@ public class TextUI {
                 }
             }
             if(cnt==(DBC._registrerteKroppsØvelser.size()+DBC._registrerteApparatØvelser.size())){
-                System.out.println("ERROR: Øvelse ikke funnet, ble ikke lagt til");
+                System.out.println("ERROR: ovelse ikke funnet, ble ikke lagt til");
             }
-            System.out.println("Legg til ovelse: (Navn på ovelse, 'Ferdig' avslutter valget)");
+            System.out.println("Legg til ovelse: \nNavn på ovelse, 'Ferdig' avslutter valget");
             cmd = inp.nextLine();
         }
         Øvelsesgrupper_Main();
