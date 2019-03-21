@@ -81,6 +81,9 @@ public class TextUI {
             MineØkter_Detaljer();
         } else if (cmd.equalsIgnoreCase("Tilbake")) {
             MineØkter_Main();
+        }else{
+            System.out.println("ERROR: Ugyldig kommando");
+            MineØkter_VisØkter();
         }
     }
 
