@@ -86,9 +86,23 @@ public class JDBCSelect{
                     Double kilo = rs2.getDouble("Kilo");
                     int sett = rs2.getInt("Sett");
                     int apparatID = rs2.getInt("ApparatID");
-                    ApparatØvelse a = new ApparatØvelse(aøID, navn, sett, kilo, apparatID);
-                    øvelser.add(a);
-                    this.dbc._registrerteApparatØvelser.add(a);
+                    if (dbc._registrerteApparatØvelser.isEmpty()){
+                        ApparatØvelse a = new ApparatØvelse(aID, navn, sett, kilo, apparatID);
+                        øvelser.add(a);
+                        this.dbc._registrerteApparatØvelser.add(a);
+                    }
+                    int cnt = 0;
+                    for (int i = 0; i < dbc._registrerteApparatØvelser.size(); i++){
+                        if (!(aID==dbc._registrerteApparatØvelser.get(i).getID())){
+                            cnt += 1;
+                        }
+                        if (cnt == dbc._registrerteApparatØvelser.size()){
+                            ApparatØvelse a = new ApparatØvelse(aID, navn, sett, kilo, apparatID);
+                            øvelser.add(a);
+                            this.dbc._registrerteApparatØvelser.add(a);
+                        }
+                    }
+
                 }
             rs2.close();
 
@@ -107,9 +121,23 @@ public class JDBCSelect{
                     int kID = rs5.getInt("KroppsØvelseID");
                     String navn = rs5.getString("Navn");
                     String beskrivelse = rs5.getString("Beskrivelse");
-                    KroppsØvelse a = new KroppsØvelse(kID, navn, beskrivelse);
-                    øvelser.add(a);
-                    this.dbc._registrerteKroppsØvelser.add(a);
+                    if (dbc._registrerteKroppsØvelser.isEmpty()){
+                        KroppsØvelse a = new KroppsØvelse(kID, navn, beskrivelse);
+                        øvelser.add(a);
+                        this.dbc._registrerteKroppsØvelser.add(a);
+                    }
+                    int cnt = 0;
+                    for (int i = 0; i < dbc._registrerteKroppsØvelser.size(); i++){
+                        if (!(kID==dbc._registrerteKroppsØvelser.get(i).getID())){
+                            cnt += 1;
+                        }
+                        if (cnt == dbc._registrerteKroppsØvelser.size()){
+                            KroppsØvelse a = new KroppsØvelse(kID, navn, beskrivelse);
+                            øvelser.add(a);
+                            this.dbc._registrerteKroppsØvelser.add(a);
+                        }
+                    }
+//
                 }
                 rs5.close();
             }
@@ -173,5 +201,82 @@ public class JDBCSelect{
         }
         return GruppeListe;
     }
+
+    public ArrayList<Øvelse> getApparatØvelser(){
+        ArrayList<Øvelse> ØvelsesListe = new ArrayList<Øvelse>();
+//        DriverManager.registerDriver(new java.sql.Driver());
+//        Class.forName("java.sql.Driver");
+        try {
+            Class.forName("com.mysql.cj.jdbc.Driver");
+            Connection conn = DriverManager.getConnection(url, u, pw);
+
+            PreparedStatement stmt = conn.prepareStatement("select * from ApparatØvelse");
+            ResultSet rs = stmt.executeQuery();
+            while (rs.next()) {
+                int kID = rs.getInt("ApparatØvelseID");
+                String navn = rs.getString("Navn");
+                double kilo = rs.getDouble("Kilo");
+                int sett = rs.getInt("Sett");
+                int aID = rs.getInt("ApparatID");
+                ArrayList<Integer> kids = new ArrayList<>();
+                for (Øvelse ø : dbc._registrerteApparatØvelser){
+                    kids.add(ø.getID());
+                }
+                if (!(kids.contains(kID))){
+                    ApparatØvelse a = new ApparatØvelse(kID, navn, sett, kilo, aID);
+                    ØvelsesListe.add(a);
+                }
+                if (debug) {
+                }
+            }
+            rs.close();
+            stmt.close();
+            conn.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+            System.err.println(e.getClass().getName() + ": " + e.getMessage());
+            System.exit(0);
+        }
+        return ØvelsesListe;
+    }
+
+    public ArrayList<Øvelse> getKroppsØvelser(){
+            ArrayList<Øvelse> ØvelsesListe = new ArrayList<Øvelse>();
+//        DriverManager.registerDriver(new java.sql.Driver());
+//        Class.forName("java.sql.Driver");
+            try {
+                Class.forName("com.mysql.cj.jdbc.Driver");
+                Connection conn = DriverManager.getConnection(url, u, pw);
+
+                PreparedStatement stmt = conn.prepareStatement("select * from KroppsØvelse");
+                ResultSet rs = stmt.executeQuery();
+                while (rs.next()) {
+                    int kID = rs.getInt("KroppsØvelseID");
+                    String navn = rs.getString("Navn");
+                    String beskrivelse = rs.getString("Beskrivelse");
+                    ArrayList<Integer> kids = new ArrayList<>();
+                    for (Øvelse ø : dbc._registrerteKroppsØvelser){
+                        kids.add(ø.getID());
+                    }
+                    if (!(kids.contains(kID))){
+                        KroppsØvelse a = new KroppsØvelse(kID, beskrivelse, navn);
+                        ØvelsesListe.add(a);
+                    }
+                    if (debug) {
+                    }
+                }
+                rs.close();
+                stmt.close();
+                conn.close();
+            } catch (Exception e) {
+                e.printStackTrace();
+                System.err.println(e.getClass().getName() + ": " + e.getMessage());
+                System.exit(0);
+            }
+            return ØvelsesListe;
+    }
+
+
+
 
 }

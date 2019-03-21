@@ -10,6 +10,7 @@ public class ØvelsesGruppe {
     public ØvelsesGruppe(int ID, String navn){
         this.øvelsesgruppeID = ID;
         this.navn = navn;
+        this.øvelser = new ArrayList<>();
     }
 
     public int getØvelsesgruppeID() {

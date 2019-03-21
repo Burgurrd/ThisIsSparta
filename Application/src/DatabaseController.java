@@ -24,6 +24,10 @@ public class DatabaseController{
         this._antallØkter = this._registrerteØkter.size();
         this._registrerteApparater.addAll(sC.getApparatListe());
         this._registrerteGrupper.addAll(sC.getGrupperListe());
+        this._registrerteApparatØvelser.addAll(sC.getApparatØvelser());
+        this._registrerteKroppsØvelser.addAll(sC.getKroppsØvelser());
+        System.out.println(this._registrerteApparatØvelser);
+        System.out.println(this._registrerteKroppsØvelser);
 
         //update all Lists
 

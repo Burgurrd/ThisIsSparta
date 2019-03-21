@@ -92,12 +92,12 @@ public class TextUI {
         }
         for (TreningsØkt elem : DBC._registrerteØkter) {
             if (Integer.parseInt(cmd) == (elem.getØktID())) {//elem.nameString)){
-                System.out.println(elem.getDato());//elem.dateString);
+                System.out.println("Dato\t" + elem.getDato());//elem.dateString);
                 for (Øvelse ø : elem.getØvelser()){
                     System.out.println("Øvelsesnavn:\t" + ø.getNavn()+ "\tØvelsesID\t" + ø.getID());
                 }
 //                System.out.println(elem.getØvelser());//elem.øvelserString);
-                System.out.println(elem.getNotat());//elem.resultatString);
+                System.out.println("Notat:\t" + elem.getNotat());//elem.resultatString);
                 System.out.println("");
             }
         }
@@ -152,6 +152,7 @@ public class TextUI {
             for(Øvelse ø : DBC._registrerteKroppsØvelser){
                 if(cmd.equals(ø.getNavn())){
                     ValgteØvelser.add(ø);
+                    break;
                 }
                 else{
                     cnt += 1;
@@ -160,6 +161,7 @@ public class TextUI {
             for(Øvelse ø : DBC._registrerteApparatØvelser){
                 if(cmd.equals(ø.getNavn())){
                     ValgteØvelser.add(ø);
+                    break;
                 }
                 else{
                     cnt += 1;
@@ -177,10 +179,13 @@ public class TextUI {
 
 // --------------------Øvelser--------------------
     public void Øvelser_Main(){//Hovedmeny for denne taben. brukes til å navigere
-        System.out.println("Jeg vil: (Meny/Registrer Øvelse)");
+        System.out.println("Jeg vil: (Meny/Vis Øvelser/Registrer Øvelse)");
         String cmd = inp.nextLine();
         if(cmd.equalsIgnoreCase("Meny")){
             menyDirect();
+        }
+        else if(cmd.equalsIgnoreCase("Vis Øvelser")){
+            Øvelser_VisØvelser();
         }
         else if(cmd.equalsIgnoreCase("Registrer Øvelse")){
             Øvelser_RegistrerØvelse();
@@ -191,6 +196,16 @@ public class TextUI {
         }
     }
 
+    private void Øvelser_VisØvelser(){ //Viser Øvelser
+        for (Øvelse ø : DBC._registrerteApparatØvelser){
+            System.out.println("ØvelsesID:\t" + ø.getID() + "\tØvelsesnavn:\t" + ø.getNavn());
+        }
+        for (Øvelse ø : DBC._registrerteKroppsØvelser){
+            System.out.println("ØvelsesID:\t" + ø.getID() + "\tØvelsesnavn:\t" + ø.getNavn());
+        }
+        Øvelser_Main();
+
+    }
     private void Øvelser_RegistrerØvelse() {//Registrerer en ny øvelse
         String øvelse = "";
         Boolean apparatøvelse = null;
@@ -331,7 +346,7 @@ public class TextUI {
 
 // --------------------Øvelsesgrupper--------------------
     public void Øvelsesgrupper_Main(){//Hovedmeny for denne taben. brukes til å navigere
-        System.out.println("Jeg vil: (Meny/Vis Øvelsesgrupper/Lag Ny Gruppe)");
+        System.out.println("Jeg vil: (Meny/Vis Øvelsesgrupper/Lag Ny Gruppe/Legg til øvelse i gruppe)");
         String cmd = inp.nextLine();
         if(cmd.equalsIgnoreCase("Meny")){
             menyDirect();
@@ -341,6 +356,9 @@ public class TextUI {
         }
         else if(cmd.equalsIgnoreCase("Lag Ny Gruppe")){
             Øvelsesgrupper_RegistrerGruppe();
+        }
+        else if(cmd.equalsIgnoreCase("Legg til øvelse i gruppe")){
+            Øvelsesgrupper_LeggTilØvelse();
         }
         else{
             System.out.println("ERROR: Ugyldig kommando");
@@ -375,7 +393,9 @@ public class TextUI {
         for(ØvelsesGruppe elem : DBC._registrerteGrupper){
             if(cmd.equals(elem.getNavn())){
                 System.out.println(elem.getNavn());
-                System.out.println(elem.getØvelser());
+                for (Øvelse ø : elem.getØvelser()){
+                    System.out.println("Øvelse:\t" + ø.getNavn());
+                }
                 System.out.println("");
             }
         }
@@ -421,6 +441,7 @@ public class TextUI {
 
                 if(cmd.equals(ø.getNavn())){
                     activeGroup.addØvelser(ø);
+                    break;
                 }
                 else{
                     cnt += 1;
@@ -429,6 +450,7 @@ public class TextUI {
             for(Øvelse ø : DBC._registrerteApparatØvelser){
                 if(cmd.equals(ø.getNavn())){
                     activeGroup.addØvelser(ø);
+                    break;
                 }
                 else{
                     cnt += 1;
@@ -440,6 +462,7 @@ public class TextUI {
             System.out.println("Legg til øvelse: (Navn på øvelse, 'Ferdig' avslutter valget)");
             cmd = inp.nextLine();
         }
+        Øvelsesgrupper_Main();
     }
     public static void main(String[] args) {//main metode
         TextUI txt = new TextUI();
