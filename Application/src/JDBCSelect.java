@@ -256,7 +256,7 @@ public class JDBCSelect{
                         kids.add(ø.getID());
                     }
                     if (!(kids.contains(kID))){
-                        KroppsØvelse a = new KroppsØvelse(kID, beskrivelse, navn);
+                        KroppsØvelse a = new KroppsØvelse(kID, navn, beskrivelse);
                         ØvelsesListe.add(a);
                     }
                     if (debug) {
