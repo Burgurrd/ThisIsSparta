@@ -13,9 +13,9 @@ import java.util.Date;
 public class JDBCInsert {
 
     public static boolean debug = true;
-    public String url = "jdbc:mysql://localhost:3306/treningsdagbok?useSSL=false";
+    public String url = "jdbc:mysql://localhost:3306/treningsdagbok?useSSL=false&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC";
     public String u = "root";
-    public String pw = "Fittehull2014";
+    public String pw = "passord";
 
 
     public void createØktØvelserRelasjon(int id, ArrayList<Øvelse> a, ArrayList<Øvelse> k){
