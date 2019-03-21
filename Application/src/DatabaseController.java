@@ -115,6 +115,17 @@ public class DatabaseController{
         }
     }
 
+
+    public void registrerØvelseIGruppe(ØvelsesGruppe activeGroup, Øvelse ø){
+        activeGroup.addØvelser(ø);
+        if (ø.isApparatØvelse){
+            iC.registrerAØvelseGruppeRelasjon(activeGroup.getØvelsesgruppeID(),ø.getID());
+        }
+        else{
+            iC.registrerKØvelseGruppeRelasjon(activeGroup.getØvelsesgruppeID(), ø.getID());
+        }
+    }
+
     Comparator<TreningsØkt> øktC = new Comparator<TreningsØkt>() {
         @Override
         public int compare(TreningsØkt o1, TreningsØkt o2) {
