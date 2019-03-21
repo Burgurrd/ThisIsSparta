@@ -1,0 +1,9 @@
+<component name="ArtifactManager">
+  <artifact type="jar" build-on-make="true" name="ThisIsSparta:jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/ThisIsSparta_jar</output-path>
+    <root id="archive" name="ThisIsSparta.jar">
+      <element id="module-output" name="Application" />
+      <element id="extracted-dir" path="$USER_HOME$/Downloads/mysql-connector-java-8.0.15/mysql-connector-java-8.0.15/mysql-connector-java-8.0.15.jar" path-in-jar="/" />
+    </root>
+  </artifact>
+</component>
