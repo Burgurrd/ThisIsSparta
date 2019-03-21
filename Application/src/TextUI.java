@@ -1,4 +1,5 @@
 import java.lang.reflect.Array;
+import java.sql.SQLOutput;
 import java.util.*;
 
 public class TextUI {
@@ -89,10 +90,13 @@ public class TextUI {
         if (cmd.equalsIgnoreCase("Tilbake")) {
             MineØkter_Main();
         }
-        for (TreningsØkt elem : this._øktListe) {
-            if (cmd.equals(elem.getØktID())) {//elem.nameString)){
+        for (TreningsØkt elem : DBC._registrerteØkter) {
+            if (Integer.parseInt(cmd) == (elem.getØktID())) {//elem.nameString)){
                 System.out.println(elem.getDato());//elem.dateString);
-                System.out.println(elem.getØvelser());//elem.øvelserString);
+                for (Øvelse ø : elem.getØvelser()){
+                    System.out.println("Øvelsesnavn:\t" + ø.getNavn()+ "\tØvelsesID\t" + ø.getID());
+                }
+//                System.out.println(elem.getØvelser());//elem.øvelserString);
                 System.out.println(elem.getNotat());//elem.resultatString);
                 System.out.println("");
             }

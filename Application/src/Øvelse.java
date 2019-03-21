@@ -13,7 +13,7 @@ public class Øvelse {
     }
 
     public String getNavn() {
-        return navn;
+        return this.navn;
     }
 
     public void setNavn(String navn) {

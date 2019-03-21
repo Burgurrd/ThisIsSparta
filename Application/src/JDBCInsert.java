@@ -1,3 +1,4 @@
+import javax.xml.crypto.Data;
 import java.sql.*;
 import java.util.ArrayList;
 import java.awt.*;
@@ -16,6 +17,11 @@ public class JDBCInsert {
     public String url = "jdbc:mysql://mysql.stud.ntnu.no:3306/fs_tdt4145_1_gruppe300?useSSL=false";
     public String u = "sigurdra_root";
     public String pw = "root";
+    public DatabaseController dbc;
+
+    public JDBCInsert(DatabaseController dbc){
+        this.dbc = dbc;
+    }
 
 
     public void createØktØvelserRelasjon(int id, ArrayList<Øvelse> a, ArrayList<Øvelse> k){
@@ -24,7 +30,7 @@ public class JDBCInsert {
                 Class.forName("com.mysql.cj.jdbc.Driver");
                 Connection conn = DriverManager.getConnection(url, u, pw);
 
-                PreparedStatement stmt = conn.prepareStatement("insert into apparatøvelseiøkt(øktid, apparatøvelseid) values (?, ?)", Statement.RETURN_GENERATED_KEYS);
+                PreparedStatement stmt = conn.prepareStatement("insert into ApparatØvelseIØkt(øktid, apparatøvelseid) values (?, ?)", Statement.RETURN_GENERATED_KEYS);
                 stmt.setInt(1, id);
                 stmt.setInt(2, ø.getID());
                 if (debug) {
@@ -43,7 +49,7 @@ public class JDBCInsert {
                 Class.forName("com.mysql.cj.jdbc.Driver");
                 Connection conn = DriverManager.getConnection(url, u, pw);
 
-                PreparedStatement stmt = conn.prepareStatement("insert into kroppsøvelseiøkt(øktid, KroppsØvelseID) values (?, ?)", Statement.RETURN_GENERATED_KEYS);
+                PreparedStatement stmt = conn.prepareStatement("insert into KroppsØvelseIØkt(øktid, KroppsØvelseID) values (?, ?)", Statement.RETURN_GENERATED_KEYS);
                 stmt.setInt(1, id);
                 stmt.setInt(2, ø.getID());
                 if (debug) {
@@ -64,7 +70,7 @@ public class JDBCInsert {
             Class.forName("com.mysql.cj.jdbc.Driver");
             Connection conn = DriverManager.getConnection(url, u, pw);
 
-            PreparedStatement stmt = conn.prepareStatement("insert into treningsøkt(dato, starttid, slutttid, form, prestasjon, notat) values (?, ?, ?, ?, ?, ?)", Statement.RETURN_GENERATED_KEYS );
+            PreparedStatement stmt = conn.prepareStatement("insert into Treningsøkt(dato, starttid, slutttid, form, prestasjon, notat) values (?, ?, ?, ?, ?, ?)", Statement.RETURN_GENERATED_KEYS );
             Date date = new SimpleDateFormat("dd.mm.yy").parse(dato);
             java.sql.Date _date = new java.sql.Date(date.getTime());
             stmt.setDate(1, _date);
@@ -109,7 +115,7 @@ public class JDBCInsert {
             Class.forName("com.mysql.cj.jdbc.Driver");
             Connection conn = DriverManager.getConnection(url, u, pw);
 
-            PreparedStatement stmt = conn.prepareStatement("insert into apparatøvelse(Navn, Kilo, Sett, ApparatID) values ( ?, ?, ?, ?)", Statement.RETURN_GENERATED_KEYS );
+            PreparedStatement stmt = conn.prepareStatement("insert into ApparatØvelse(Navn, Kilo, Sett, ApparatID) values ( ?, ?, ?, ?)", Statement.RETURN_GENERATED_KEYS );
             stmt.setString(1,navn);
             double _kilo = Double.parseDouble(kilo);
             stmt.setDouble(2, _kilo);
@@ -140,7 +146,7 @@ public class JDBCInsert {
             Class.forName("com.mysql.cj.jdbc.Driver");
             Connection conn = DriverManager.getConnection(url, u, pw);
 
-            PreparedStatement stmt = conn.prepareStatement("insert into kroppsøvelse(Navn, Beskrivelse) values ( ?, ?)", Statement.RETURN_GENERATED_KEYS );
+            PreparedStatement stmt = conn.prepareStatement("insert into KroppsØvelse(Navn, Beskrivelse) values ( ?, ?)", Statement.RETURN_GENERATED_KEYS );
             stmt.setString(1,navn);
             stmt.setString(2, beskrivelse);
             int id = stmt.executeUpdate();
@@ -165,7 +171,7 @@ public class JDBCInsert {
             Class.forName("com.mysql.cj.jdbc.Driver");
             Connection conn = DriverManager.getConnection(url, u, pw);
 
-            PreparedStatement stmt = conn.prepareStatement("insert into apparat(Navn, Funksjon) values ( ?, ?)", Statement.RETURN_GENERATED_KEYS );
+            PreparedStatement stmt = conn.prepareStatement("insert into Apparat(Navn, Funksjon) values ( ?, ?)", Statement.RETURN_GENERATED_KEYS );
             stmt.setString(1,navn);
             stmt.setString(2, funksjon);
             int id = stmt.executeUpdate();
@@ -189,7 +195,7 @@ public class JDBCInsert {
             Class.forName("com.mysql.cj.jdbc.Driver");
             Connection conn = DriverManager.getConnection(url, u, pw);
 
-            PreparedStatement stmt = conn.prepareStatement("insert into øvelsesgruppe(Navn) values (?)", Statement.RETURN_GENERATED_KEYS );
+            PreparedStatement stmt = conn.prepareStatement("insert into ØvelsesGruppe(Navn) values (?)", Statement.RETURN_GENERATED_KEYS );
             stmt.setString(1,navn);
             int id = stmt.executeUpdate();
             ØvelsesGruppe øg = new ØvelsesGruppe(id, navn);

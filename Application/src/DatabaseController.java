@@ -17,8 +17,8 @@ public class DatabaseController{
 
 
     public DatabaseController(){
-        this.iC = new JDBCInsert();
-        this.sC = new JDBCSelect();
+        this.iC = new JDBCInsert(this);
+        this.sC = new JDBCSelect(this);
         this._registrerteØkter.addAll(sC.getØktListe());
         Collections.sort(_registrerteØkter, øktC);
         this._antallØkter = this._registrerteØkter.size();

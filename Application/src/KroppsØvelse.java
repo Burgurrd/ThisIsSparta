@@ -6,7 +6,7 @@ public class KroppsØvelse extends Øvelse {
     public KroppsØvelse(int ID, String navn, String beskrivelse){
         super(ID,false, navn);
         this.kroppsØvelseID = ID;
-//        this.navn = navn;
+        this.navn = super.getNavn();
         this.beskrivelse = beskrivelse;
 
     }

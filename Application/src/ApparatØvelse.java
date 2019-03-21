@@ -6,7 +6,7 @@ public class ApparatØvelse extends Øvelse {
     public ApparatØvelse(int ID, String navn, int sett, double kilo, int apparatID){
         super(ID,true, navn);
         this.apparatØvelseID = ID;
-//        this.navn = navn;
+        this.navn = super.getNavn();
         this.sett = sett;
         this.kilo = kilo;
         this.apparatID = apparatID;
