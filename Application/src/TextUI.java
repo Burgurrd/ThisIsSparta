@@ -141,26 +141,55 @@ public class TextUI {
     private void NyØkt_RegistrerØkt() {//Registrerer en ny økt
         ArrayList<Øvelse> ValgteØvelser = new ArrayList<>();
         String økt = "";
+        String strt;
         int cnt = 0;
         System.out.println("\nDato: \ndd.mm.åå | 'Tilbake' for å gå tilbake");
         String cmd = inp.nextLine();
         if(cmd.equalsIgnoreCase("Tilbake")){
             NyØkt_Main();
+        }else if(! (cmd.length()==8)){
+            System.out.println("ERROR: Ugyldig input");
+            NyØkt_RegistrerØkt();
         }
         økt += cmd;
         økt += ",";
         System.out.println("\nStarttid: \nhh.mm");
-        økt += inp.nextLine();
-        økt += ",";
+        strt = inp.nextLine();
+        if (strt.length() == 5){
+            økt += strt;
+            økt += ",";
+        }else{
+            System.out.println("ERROR: Ugyldig input");
+            NyØkt_RegistrerØkt();
+        }
         System.out.println("\nSluttid: \nhh.mm");
-        økt += inp.nextLine();
-        økt += ",";
+        strt = inp.nextLine();
+        if (strt.length() == 5){
+            økt += strt;
+            økt += ",";
+        }else{
+            System.out.println("ERROR: Ugyldig input");
+            NyØkt_RegistrerØkt();
+        }
         System.out.println("\nDagsform: \n1-10");
-        økt += inp.nextLine();
-        økt += ",";
+        strt = inp.nextLine();
+        if (strt.length() == 1 || strt == "10"){
+            økt += strt;
+            økt += ",";
+        }else{
+            System.out.println("ERROR: Ugyldig input");
+            NyØkt_RegistrerØkt();
+        }
+
         System.out.println("\nPrestasjon: \n1-10");
-        økt += inp.nextLine();
-        økt += ",";
+        strt = inp.nextLine();
+        if (strt.length() == 1 || strt == "10"){
+            økt += strt;
+            økt += ",";
+        }else{
+            System.out.println("ERROR: Ugyldig input");
+            NyØkt_RegistrerØkt();
+        }
         System.out.println("\nResultat: \nSkriftlig oppsummering");
         økt += inp.nextLine();
         for (Øvelse a :DBC._registrerteApparatØvelser){
