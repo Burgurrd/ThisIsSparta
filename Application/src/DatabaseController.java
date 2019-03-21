@@ -51,6 +51,7 @@ public class DatabaseController{
             }
         }
         TreningsØkt t_ø = iC.createØkt(dato, StartTid, SluttTid, Dagsform, Prestasjon, Notat, a,k);
+        this._registrerteØkter.add(t_ø);
         return t_ø;
     }
 
